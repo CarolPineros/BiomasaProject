@@ -2,82 +2,83 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Introduccion</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Introducción</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
 
-<body>
-    {% include 'includes/header.html' %}
-    <div class="container">
-        {% include 'includes/items.html' %}
-        <div class="right">
-            <h1>¿Que es la Biomasa?</h1>
+    <body>
+        {% include 'includes/header.html' %}
 
-            <p>
-                La biomasa es la materia orgánica de origen vegetal o animal que se emplea como una fuente de energía
-                renovable. Esta amplia categoría engloba una variedad de materiales, como residuos agrícolas,
-                forestales, industriales y urbanos, así como cultivos específicamente destinados para su uso energético.
-                Se puede aprovechar a través de procesos como la combustión, la fermentación o la transformación
-                química. Entre los ejemplos se encuentran la madera, los restos de cultivos, los alimentos, el estiércol
-                y las algas.
-                <br>
-                La energía producida a partir de la biomasa se denomina bioenergía y tiene aplicaciones en la generación
-                de electricidad, calefacción y la producción de biocombustibles como el etanol y el biodiesel. Una de
-                las ventajas más destacadas de la biomasa es su naturaleza renovable, ya que puede regenerarse en un
-                plazo razonable, a diferencia de los combustibles fósiles que requieren millones de años para formarse y
-                son finitos.
-                <br>
-                La generación de energía a partir de biomasa residual es un proceso complejo en el ámbito de la
-                generación
-                eléctrica del país, especialmente en las zonas no interconectadas. A medida que se investiga más en este
-                campo, se vislumbran proyecciones futuras muy favorables. Por esta razón, se busca sintetizar los pasos
-                necesarios para respaldar el diseño de Centros de Generación Distribuida en las Zonas No Interconectadas
-                (ZNI), considerando tanto variables cualitativas como cuantitativas.
-                <br> En este estudio, se propone desarrollar una algoritmo para apoyar el diseño de centrales de
-                generación
-                de
-                energía a partir de biomasa residual en zonas no interconectadas (ZNI). Se definieron los procesos
-                necesarios para llegar a dimensionar el sistema utilizando bases de datos existentes de biomasa residual
-                en
-                Colombia, potenciales energeticos, tecnologías y capacidades tecnológicas de la tecnología más
-                apropiada y
-                cantidad de plantas posibles para asegurar una operación continua del sistema.
+        <div class="container">
 
-                Algunos terminos para la compresión del desarrollo del software para diseño de centros de generacion
-                distribuida de Biomaasa residual en las ZNI de Colombia.
+            {% include 'includes/items.html' %}
 
-            <ul>
-                <li><strong>Centro de consumo:</strong> Puntos finales de uso energético como hogares, comercios e
-                    industrias.</li>
-                <li><strong>CGD:</strong> Centro de generación distribuida, produce energía cercana al consumo desde
-                    fuentes renovables.</li>
-                <li><strong>BR:</strong> Biomasa residual, materia orgánica de desechos para energía sostenible.</li>
-                <li><strong>ZNI:</strong> Zonas no interconectadas, sin red eléctrica principal.</li>
-                <li><strong>SIN:</strong> Sistema interconectado nacional.</li>
-                <li><strong>PCI:</strong> Poder calorífico inferior, calor liberado al quemar una sustancia.</li>
-                <li><strong>Digestión Anaerobia:</strong> Descomposición sin oxígeno para biogás.</li>
-                <li><strong>Gasificación:</strong> Conversión de biomasa en gas de síntesis.</li>
-                <li><strong>Combustión:</strong> Quema controlada para calor y energía.</li>
-                <li><strong>Ciclo Rankine:</strong> Convierte calor en trabajo y electricidad.</li>
-                <li><strong>Ciclo Rankine Orgánico:</strong> Variedad con fluido orgánico en vez de agua.</li>
-                <li><strong>Syngas (Gas de Síntesis):</strong> Mezcla de monóxido de carbono e hidrógeno.</li>
-                <li><strong>Motor de Combustión Interna:</strong> Convierte calor en energía mecánica.</li>
-                <li><strong>Eficiencia Energética:</strong> Ratio entre energía útil y total consumida.</li>
-                <li><strong>Ruta tecnológica (RT):</strong> Métodos para producción de energía y productos químicos
-                    mediante reacciones químicas.</li>
+            <div class="right">
+                <h1>¿Que es la Biomasa?</h1>
 
-            </ul>
+                <p>
+                    La biomasa es la materia orgánica de origen vegetal o animal que se emplea como una fuente de energía
+                    renovable. Esta amplia categoría engloba una variedad de materiales, como residuos agrícolas,
+                    forestales, industriales y urbanos, así como cultivos específicamente destinados para su uso energético.
+                    Se puede aprovechar a través de procesos como la combustión, la fermentación o la transformación
+                    química. Entre los ejemplos se encuentran la madera, los restos de cultivos, los alimentos, el estiércol
+                    y las algas.
+                    <br>
+                    La energía producida a partir de la biomasa se denomina bioenergía y tiene aplicaciones en la generación
+                    de electricidad, calefacción y la producción de biocombustibles como el etanol y el biodiesel. Una de
+                    las ventajas más destacadas de la biomasa es su naturaleza renovable, ya que puede regenerarse en un
+                    plazo razonable, a diferencia de los combustibles fósiles que requieren millones de años para formarse y
+                    son finitos.
+                    <br>
+                    La generación de energía a partir de biomasa residual es un proceso complejo en el ámbito de la
+                    generación
+                    eléctrica del país, especialmente en las zonas no interconectadas. A medida que se investiga más en este
+                    campo, se vislumbran proyecciones futuras muy favorables. Por esta razón, se busca sintetizar los pasos
+                    necesarios para respaldar el diseño de Centros de Generación Distribuida en las Zonas No Interconectadas
+                    (ZNI), considerando tanto variables cualitativas como cuantitativas.
+                    <br> En este estudio, se propone desarrollar una algoritmo para apoyar el diseño de centrales de
+                    generación
+                    de
+                    energía a partir de biomasa residual en zonas no interconectadas (ZNI). Se definieron los procesos
+                    necesarios para llegar a dimensionar el sistema utilizando bases de datos existentes de biomasa residual
+                    en
+                    Colombia, potenciales energeticos, tecnologías y capacidades tecnológicas de la tecnología más
+                    apropiada y
+                    cantidad de plantas posibles para asegurar una operación continua del sistema.
 
+                    Algunos terminos para la compresión del desarrollo del software para diseño de centros de generacion
+                    distribuida de Biomaasa residual en las ZNI de Colombia.
+                </p>
 
+                <ul>
+                    <li><strong>Centro de consumo:</strong> Puntos finales de uso energético como hogares, comercios e
+                        industrias.</li>
+                    <li><strong>CGD:</strong> Centro de generación distribuida, produce energía cercana al consumo desde
+                        fuentes renovables.</li>
+                    <li><strong>BR:</strong> Biomasa residual, materia orgánica de desechos para energía sostenible.</li>
+                    <li><strong>ZNI:</strong> Zonas no interconectadas, sin red eléctrica principal.</li>
+                    <li><strong>SIN:</strong> Sistema interconectado nacional.</li>
+                    <li><strong>PCI:</strong> Poder calorífico inferior, calor liberado al quemar una sustancia.</li>
+                    <li><strong>Digestión Anaerobia:</strong> Descomposición sin oxígeno para biogás.</li>
+                    <li><strong>Gasificación:</strong> Conversión de biomasa en gas de síntesis.</li>
+                    <li><strong>Combustión:</strong> Quema controlada para calor y energía.</li>
+                    <li><strong>Ciclo Rankine:</strong> Convierte calor en trabajo y electricidad.</li>
+                    <li><strong>Ciclo Rankine Orgánico:</strong> Variedad con fluido orgánico en vez de agua.</li>
+                    <li><strong>Syngas (Gas de Síntesis):</strong> Mezcla de monóxido de carbono e hidrógeno.</li>
+                    <li><strong>Motor de Combustión Interna:</strong> Convierte calor en energía mecánica.</li>
+                    <li><strong>Eficiencia Energética:</strong> Ratio entre energía útil y total consumida.</li>
+                    <li><strong>Ruta tecnológica (RT):</strong> Métodos para producción de energía y productos químicos
+                        mediante reacciones químicas.</li>
 
+                </ul>
 
-            </p>
+                <a href="{% url 'inicio' %}"><button class="button">Continuar</button></a>
+            </div>
 
-            <a href="{% url 'inicio' %}"><button class="button">Continuar</button></a>
         </div>
-    </div>
-</body>
+
+    </body>
 
 </html>

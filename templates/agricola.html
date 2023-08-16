@@ -13,116 +13,130 @@
     <div class="container">
         {% include 'includes/items.html' %}
         <div class="right">
-            {% if not proceso.agricola and proceso.total_hectareas <= 0 %} <h1>Módulo Biomasa residual Agrícola</h1>
+            {% if not proceso.agricola and proceso.total_hectareas <= 0 %} 
+            
+            <h1>Módulo Biomasa residual Agrícola</h1>
 
-                <p> En módulo Agrícola se determinará la masa de residuo generado y el Potencial energético de la
-                    biomasa residual agrícola. <br>
-                    La Biomasa residual agrícola (BRA) es toda aquella conformada por los residuos o subproductos de la
-                    actividad agrícola en algún cultivo específico, que puede ser permanente o transitorio.
-                    Estos cultivos corresponden a los más representativos de Colombia [Arboleda y otros, 2020]. La
-                    biomasa residual agrícola puede ser empleada para generar energía dado su contenido de materia
-                    orgánica. Cuando esta biomasa se somete a procesos de combustión o a procesos de descomposición
-                    controlada, libera calor en forma de energía térmica. Este calor puede ser utilizado para generar
-                    vapor e impulsar turbinas, produciendo electricidad. <br>
-                    Para esto se requiere ingresar características de la biomasa residual que se encuentra disponible
-                    para emplear en el proyecto de bioenergía, se le solicitará cultivo, tipo de residuo,
-                    hectáreas sembradas al año, y el departamento donde se ubica. Tenga en cuenta que la
-                    biomasa debe estar dentro de la distancia (radio de recolecta) anteriormente ingresado.
-                    <br>
+            <p> En módulo Agrícola se determinará la masa de residuo generado y el Potencial energético de la
+                biomasa residual agrícola. <br>
+                La Biomasa residual agrícola (BRA) es toda aquella conformada por los residuos o subproductos de la
+                actividad agrícola en algún cultivo específico, que puede ser permanente o transitorio.
+                Estos cultivos corresponden a los más representativos de Colombia [Arboleda y otros, 2020]. La
+                biomasa residual agrícola puede ser empleada para generar energía dado su contenido de materia
+                orgánica. Cuando esta biomasa se somete a procesos de combustión o a procesos de descomposición
+                controlada, libera calor en forma de energía térmica. Este calor puede ser utilizado para generar
+                vapor e impulsar turbinas, produciendo electricidad. <br>
+                Para esto se requiere ingresar características de la biomasa residual que se encuentra disponible
+                para emplear en el proyecto de bioenergía, se le solicitará cultivo, tipo de residuo,
+                hectáreas sembradas al año, y el departamento donde se ubica. Tenga en cuenta que la
+                biomasa debe estar dentro de la distancia (radio de recolecta) anteriormente ingresado.
+                <br>
+                Los cultivos disponibles para evaluación son: palma de aceite, caña de azúcar, caña para
+                panela, café, maíz, arroz, banano, plátano, algodón, coco, frijol, maní, soya, trigo,
+                yuca. Estos cultivos corresponden a los más representativos de Colombia.
+            </p>
+
+            <form action="{% url 'agricola_pregunta' proceso.id %}" method="post">
+                {% csrf_token %}
+
+                <div class="inputs">
+                    <strong>¿Dispone de Biomasa Residual Agrícola? </strong>
+                </div>
+                <button class="button" type="submit" name="respuesta" value="True">Sí</button>
+                <button class="button" type="submit" name="respuesta" value="False">No</button>
+                
+            </form>
+
+            {% else %}
+            
+            <div>
+                    
+                <h1>Módulo Biomasa residual Agrícola</h1>
+
+                <p> Ingrese las características de la biomasa residual que se encuentra disponible
+                    para emplear en el proyecto de bioenergía. Tenga en cuenta que la
+                    biomasa debe estar dentro de la distancia (radio de recolecta) anteriormente evaluado.
                     Los cultivos disponibles para evaluación son: palma de aceite, caña de azúcar, caña para
                     panela, café, maíz, arroz, banano, plátano, algodón, coco, frijol, maní, soya, trigo,
-                    yuca. Estos cultivos corresponden a los más representativos de Colombia.
+                    yuca.
                 </p>
 
-                <form action="{% url 'agricola_pregunta' proceso.id %}" method="post">
-                    {% csrf_token %}
+            </div>
 
-                    <div class="inputs">
-                        <strong>¿Dispone de Biomasa Residual Agrícola? </strong>
-                    </div>
-                    <button class="button" type="submit" name="respuesta" value="True">Sí</button>
-                    <button class="button" type="submit" name="respuesta" value="False">No</button>
-                </form>
-                {% else %}
-                <div class="container-biomasa">
-
-                    <div class="left-biomasa">
-                        <h1>Módulo Biomasa residual Agrícola</h1>
+            <div class="container-biomasa">
 
 
-                        <form action="{% url 'agricola' proceso.id %}" method="post">
-                            {% csrf_token %}
-                            <p> Ingrese las características de la biomasa residual que se encuentra disponible
-                                para emplear en el proyecto de bioenergía. Tenga en cuenta que la
-                                biomasa debe estar dentro de la distancia (radio de recolecta) anteriormente evaluado.
-                                Los cultivos disponibles para evaluación son: palma de aceite, caña de azúcar, caña para
-                                panela, café, maíz, arroz, banano, plátano, algodón, coco, frijol, maní, soya, trigo,
-                                yuca.
-                            </p>
+                <div class="left-biomasa">
 
-                            <div class="inputs">
-                                <strong>Seleccione un departamento donde ubica la biomasa residual. <br> Region:
-                                    {{proceso.region}}: <br></strong>
-                                {{form.departamento}}
-                                <strong>Seleccione Cultivo: </strong> {{form.cultivo}}
-                                <strong>Seleccione Residuo agrícola: </strong> {{form.residuo}}
-                                <strong>Ingrese cantidad de hectáreas (ha) sembradas al año: </strong>
-                                {{form.hectareas}}
+                    <form action="{% url 'agricola' proceso.id %}" method="post">
+                        {% csrf_token %}
 
-                            </div>
-                            <button type="submit" class="button">Añadir</button>
-                        </form>
-                    </div>
-                    <div class="right-biomasa">
-                        <h1>Resultados</h1>
-                        <p>En la siguente tabla se muestran los resultados de la biomasa agrícola ingresada y potencial
-                            energético:</p>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Nº</th>
-                                    <th>Cultivo</th>
-                                    <th>Residuo</th>
-                                    <th>Región</th>
-                                    <th>Departamento</th>
-                                    <th>Hectareas</th>
-                                    <th>Masa Agrícola</th>
-                                    <th>Potencial energético Termoquímico [MWh/año]</th>
-                                    <th>Potencial energético Bioquímico [MWh/año]</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for biomasa in proceso.biomasa_agricola.all %}
-                                <tr>
-                                    <td>{{ forloop.counter }}</td>
-                                    <td>{{ biomasa.residuo_agricola.cultivo }}</td>
-                                    <td>{{ biomasa.residuo_agricola.residuo }}</td>
-                                    <td>{{ biomasa.rendimiento_agricola.region }}</td>
-                                    <td>{{ biomasa.rendimiento_agricola.departamento }}</td>
-                                    <td>{{ biomasa.hectareas }}</td>
-                                    <td>{{ biomasa.masa_agricola|floatformat:3 }}</td>
-                                    <td>{{ biomasa.pot_rt_termo_agri|floatformat:3 }}</td>
-                                    <td>{{ biomasa.pot_rt_bioq_agri|floatformat:3 }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th colspan="5">Total:</th>
-                                    <td> {{ proceso.total_hectareas }} </td>
-                                    <td> {{ proceso.total_masa_agricola|floatformat:3 }} </td>
-                                    <td> {{ proceso.total_pot_rt_termo_agri|floatformat:3 }} </td>
-                                    <td> {{ proceso.total_pot_rt_bioq_agri|floatformat:3 }} </td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                        {% if proceso.total_hectareas > 0 %}
-                        <a href="{% url 'pecuaria' proceso.id %}"><button class="button">Guardar y
-                                continuar</button></a>
-                        {% endif %}
-                    </div>
+                        <div class="inputs">
+                            <strong>Seleccione un departamento donde ubica la biomasa residual. 
+                                <br> 
+                                    Región:  {{proceso.get_region_display}}
+                                <br>
+                            </strong>
+                            {{form.departamento}}
+                            <strong>Seleccione Cultivo: </strong> {{form.cultivo}}
+                            <strong>Seleccione Residuo agrícola: </strong> {{form.residuo}}
+                            <strong>Ingrese cantidad de hectáreas (ha) sembradas al año: </strong>
+                            {{form.hectareas}}
+
+                        </div>
+                        <button type="submit" class="button">Añadir</button>
+                    </form>
                 </div>
-                {% endif %}
+                <div class="right-biomasa">
+                    <h1>Resultados</h1>
+                    <p>En la siguente tabla se muestran los resultados de la biomasa agrícola ingresada y potencial
+                        energético:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>Cultivo</th>
+                                <th>Residuo</th>
+                                <th>Región</th>
+                                <th>Departamento</th>
+                                <th>Hectareas</th>
+                                <th>Masa Agrícola</th>
+                                <th>Potencial energético Termoquímico [MWh/año]</th>
+                                <th>Potencial energético Bioquímico [MWh/año]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for biomasa in proceso.biomasa_agricola.all %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ biomasa.residuo_agricola.cultivo }}</td>
+                                <td>{{ biomasa.residuo_agricola.residuo }}</td>
+                                <td>{{ biomasa.rendimiento_agricola.region }}</td>
+                                <td>{{ biomasa.rendimiento_agricola.departamento }}</td>
+                                <td>{{ biomasa.hectareas }}</td>
+                                <td>{{ biomasa.masa_agricola|floatformat:3 }}</td>
+                                <td>{{ biomasa.pot_rt_termo_agri|floatformat:3 }}</td>
+                                <td>{{ biomasa.pot_rt_bioq_agri|floatformat:3 }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="5">Total:</th>
+                                <td> {{ proceso.total_hectareas }} </td>
+                                <td> {{ proceso.total_masa_agricola|floatformat:3 }} </td>
+                                <td> {{ proceso.total_pot_rt_termo_agri|floatformat:3 }} </td>
+                                <td> {{ proceso.total_pot_rt_bioq_agri|floatformat:3 }} </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    {% if proceso.total_hectareas > 0 %}
+                    <a href="{% url 'pecuaria' proceso.id %}"><button class="button">Guardar y
+                            continuar</button></a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
 </body>

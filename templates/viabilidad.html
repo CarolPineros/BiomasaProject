@@ -14,12 +14,16 @@
                 {% if not proceso.region %}
                     <h1>Viabilidad</h1>
                     <div class= "description">
-                        <p>Para realizar un análisis del uso energético de la biomasa, es crucial considerar la región y la
+                        <p>
+                          Para realizar un análisis del uso energético de la biomasa, es crucial considerar la región y la
                             distancia involucrada. La región se refiere al lugar geográfico en el cual se llevaría a cabo el
                             proyecto de biomasa, como la Región Amazónica, Pacífica u Orinoquía. Por otro lado, distancia se
                             refiere a la proximidad o accesibilidad de la biomasa (ReMax : radio máximo de recolecta). Si desea profundizar en este tema, le invitamos a consultar la investigación correspondiente. <br>
-                        Se han estimado distancias máximas permitidas para cada región :
+                            Se han estimado distancias máximas permitidas para cada región :
+                        </p>
+                        <div class="centrado">
                             <table>
+                              <caption>Radio máximo de recolecta de las ZNI de Colombia</caption>
                                 <tr>
                                   <th>Región</th>
                                   <th>ReMax [km]</th>
@@ -36,12 +40,13 @@
                                     <td>Pacífica </td>
                                     <td>21,28</td>
                                   </tr>
-                                  <caption>Radio máximo de recolecta de las ZNI de Colombia</caption>
                               </table>
-                           
+                          </div>
+                          <p>
                             Para evaluar este primer parámetro, seleccione la región geográfica en la cual
                             planea instalar el centro de generación distribuida e ingrese la distancia entre el punto donde se encuentra la biomasa residual y el lugar donde se proyecta instalar el centro de generación
-                            distribuida. Si no cuenta con esta información, ingrese una distancia aproximada. </p>
+                            distribuida. Si no cuenta con esta información, ingrese una distancia aproximada. 
+                          </p>
                 
                     </div>
                     <form action="{% url 'viabilidad' proceso.id %}" method="post">
@@ -56,6 +61,7 @@
                 {% else %}
                     <div class= "results">
                         <h1>Resultados Viabilidad por radio de Recolecta </h1>
+                        <div class="centrado">
                         <table>
                             <tr>
                               <th>Región</th>
@@ -75,9 +81,9 @@
                               </tr>
                               <caption>Radio máximo de recolecta de las ZNI de Colombia</caption>
                           </table>
+                        </div>
 
-
-                        <p>La distancia ingresada de {{proceso.distancia}} km en la región {{proceso.region}} se considera <span class="{% if proceso.resultado == 'viable' %}viable{% endif %}">{{proceso.get_resultado_display}}</span> 
+                        <p>La distancia ingresada de {{proceso.distancia}} km en la región {{proceso.get_region_display}} se considera <span class="{% if proceso.resultado == 'viable' %}viable{% endif %}">{{proceso.get_resultado_display}}</span> 
                             para desarrollar el proyecto de generación con biomasa residual. </p>
                         {% if proceso.resultado == 'inviable' %}
                         <p>Nota: Incluso considerando el resultado de este factor, se permite la opción de continuar con el proceso, para evaluar los resultados del potencial energético y la tecnología a utilizar con la biomasa disponible que sea ingresada.</p>

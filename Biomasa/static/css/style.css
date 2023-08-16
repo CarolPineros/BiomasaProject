@@ -1,17 +1,11 @@
 /* Estilos para el encabezado de la pagina*/
-caption {
-    font-size: 8px;
-    text-align: center;
-    margin-top: 10px;
-}
-
 header {
-    background-color: rgb(140, 180, 19);
+    background-color: #4CAF50;
     padding: 20px;
     color: white;
     text-align: center;
 }
-
+    
 h1 {
     font-size: 24px;
     margin: 0;
@@ -35,7 +29,7 @@ body {
 }
 
 .left {
-    flex-basis: 12%;
+    flex-basis: 15%;
     padding: 20px;
     background-color: #f2f2f2;
     border-right: 2px solid #ccc;
@@ -63,12 +57,12 @@ body {
     border-radius: 5px;
 }
 
-.left li a:hover {
+.left li a:hover{
     background-color: #aeadad;
 }
 
 .left li a.active {
-    background-color: rgb(140, 180, 19);
+    background-color: #8A9A5B;
     color: white;
 }
 
@@ -78,18 +72,20 @@ body {
 }
 
 .right {
-    flex-basis: 80%;
+    flex: 1;
+    flex-basis: 85%;
     padding: 20px;
 }
 
 .right h1 {
     font-size: 24px;
-    color: rgb(140, 180, 19);
+    color: #4CAF50;
     margin-bottom: 20px;
 }
 
 .right p {
     font-size: 16px;
+    text-align:  justify;
     color: #333333;
     margin-bottom: 20px;
 }
@@ -112,34 +108,44 @@ body {
     list-style-type: disc;
 }
 
+.items_biomasa{
+    margin-left: 20px;
+}
+
 .description {
     margin-bottom: 20px;
 }
-
+    
 .description p {
     font-size: 16px;
     color: #333333;
+}
+
+.centrado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .inputs {
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
-}
-
+    }
+    
 .inputs strong {
     font-weight: bold;
     margin-bottom: 5px;
-}
+    }
 
 .custom-select {
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: 70%;
+    width:70%;
     margin-bottom: 10px;
 }
-
+    
 .custom-input {
     padding: 5px;
     border: 1px solid #ccc;
@@ -152,12 +158,11 @@ body {
 .results p span {
     font-weight: bold;
     color: red;
-}
+    }
 
-.results p span.viable {
-    color: rgb(140, 180, 19);
-    /* Color cuando es viable */
-}
+.results  p span.viable {
+    color: rgb(13, 108, 231); /* Color cuando es viable */
+    }
 
 .inviable {
     margin-bottom: 20px;
@@ -195,27 +200,26 @@ body {
 }
 
 .button:hover {
-    background-color: rgb(140, 180, 19);
+background-color: #689F38;
 }
 
 .button:active {
-    background-color: rgb(140, 180, 19);
+background-color: #558B2F;
 }
 
 
 .container-biomasa {
     display: flex;
-    margin: 10px
 }
 
 .left-biomasa {
-    flex-basis: 50%;
-    margin: 10px
+    flex-basis: 40%;
+    padding: 15px;
 }
 
 .right-biomasa {
-    flex-basis: 50%;
-    margin: 10px
+    flex-basis:60%;
+    padding: 15px;
 }
 
 table {
@@ -223,16 +227,14 @@ table {
     margin-bottom: 30px;
 }
 
-th,
-td {
+th, td {
     text-align: left;
     padding: 5px;
     border: 1px solid #000;
     font-size: 14px;
     text-align: center;
 }
-
-thead {
+thead{
     background-color: #cecece;
 }
 
@@ -241,11 +243,9 @@ thead {
 }
 
 #btnSi {
-    background-color: #828282;
-    /* Verde */
+    background-color: #828282; /* Verde */
 }
-
+    
 #btnNo {
-    background-color: #828282;
-    /* Rojo */
+    background-color: #828282; /* Rojo */
 }

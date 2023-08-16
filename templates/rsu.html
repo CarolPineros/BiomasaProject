@@ -2,163 +2,171 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Biomasa RSU</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script defer src="{% static 'js/script.js' %}"></script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Biomasa RSU</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <script defer src="{% static 'js/script.js' %}"></script>
+    </head>
 
-<body>
-    {% include 'includes/header.html' %}
-    <div class="container">
-        {% include 'includes/items.html' %}
-        <div class="right">
-            {% if not proceso.rsu %}
-            <h1> Módulo Residuos Sólidos Urbanos (RSU)</h1>
-            <form action="{% url 'rsu_pregunta' proceso.id %}" method="post">
-                {% csrf_token %}
-                <div class="inputs">
-                    <p>
-                        Los Residuos Sólidos Urbanos (RSU), son aquellos en estado sólido o semi sólido producto de las
-                        actividades propias del hombre, los cuales se pueden clasificar según su origen, así:
-                        domiciliarios,
-                        de limpieza urbana, de establecimientos comerciales y prestadores de servicios, de servicios
-                        públicos, de saneamiento básico, de industrias, de servicios de salud, de construcción civil,
-                        de servicios de transporte y de minería. (Superservicios & DNP, 2018). El dato de generación
-                        promedio de resiudos por habitante en Colombia es de 0,68 kg/día. Algunos datos de referencia se
-                        presentan a continuación.
+    <body>
+        {% include 'includes/header.html' %}
+        <div class="container">
+            {% include 'includes/items.html' %}
+            <div class="right">
+                {% if not proceso.rsu %}
+                <h1> Módulo Residuos Sólidos Urbanos (RSU)</h1>
+                <form action="{% url 'rsu_pregunta' proceso.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="inputs">
+                        <p>
+                            Los Residuos Sólidos Urbanos (RSU), son aquellos en estado sólido o semi sólido producto de las
+                            actividades propias del hombre, los cuales se pueden clasificar según su origen, así:
+                            domiciliarios,
+                            de limpieza urbana, de establecimientos comerciales y prestadores de servicios, de servicios
+                            públicos, de saneamiento básico, de industrias, de servicios de salud, de construcción civil,
+                            de servicios de transporte y de minería. (Superservicios & DNP, 2018). El dato de generación
+                            promedio de resiudos por habitante en Colombia es de 0,68 kg/día. Algunos datos de referencia se
+                            presentan a continuación.
 
-                    <table border="1">
-                        <tr>
-                            <th> Región</th>
-                            <th>RSU (kg/dia)</th>
-                        </tr>
-                        <tr>
-                            <td>Amazonía </td>
-                            <td>0,57</td>
+                        <div class="centrado">
 
-                        <tr>
-                            <td>Andina </td>
-                            <td>0,67</td>
-                        </tr>
+                            <table>
+                                <tr>
+                                    <th> Región</th>
+                                    <th>RSU (kg/dia)</th>
+                                </tr>
+                                <tr>
+                                    <td>Amazonía </td>
+                                    <td>0,57</td>
 
-                        <tr>
-                            <td>Caribe </td>
-                            <td>0,73</td>
-                        </tr>
+                                <tr>
+                                    <td>Andina </td>
+                                    <td>0,67</td>
+                                </tr>
 
-                        <tr>
-                            <td>Orinoquía </td>
-                            <td>0,67</td>
-                        </tr>
+                                <tr>
+                                    <td>Caribe </td>
+                                    <td>0,73</td>
+                                </tr>
 
-                        <tr>
-                            <td>Pacifica </td>
-                            <td>0,66</td>
-                        </tr>
-                        </tr>
-                    </table>
-                    Es fundamental tener en cuenta las restricciones que existen al utilizar RSUO en la generación de
-                    energía:
-                    <li>
-                        Distancia máxima entre CGD y fuente de biomasa: La falta de separación en los Residuos
-                        Sólidos
-                        Urbanos (RSU) resulta en altos niveles de humedad y un volumen significativo. Esta mezcla
-                        heterogénea dificulta su manejo eficiente.
-                        Se recomienda que la distancia entre el centro de Generación de Energía y la biomasa sea
-                        <strong> inferior a 2 km </strong>, debido a diversos factores que afectan el transporte de
-                        la biomasa por costos logísticos elevados, los requisitos de permisos ambientales y
-                        consideraciones sociales,entre otros. Es importante respetar esta distancia para garantizar
-                        un proceso eficiente y
-                        minimizar los impactos negativos asociados al manejo de residuos solidos urbanos en la
-                        producción de energía.
+                                <tr>
+                                    <td>Orinoquía </td>
+                                    <td>0,67</td>
+                                </tr>
 
-                    </li>
-                    </p>
-                    <strong> Evalue si la biomasa residual soporta la restricción anteriormente expuesta y responda:
-                        <br>
-                        ¿Dispone de Residuos Sólidos Urbanos (RSU) para el proyecto de energía? </strong>
-                </div>
-                <button class="button" type="submit" name="respuesta" value="True">Sí</button>
-                <button class="button" type="submit" name="respuesta" value="False">No</button>
-            </form>
-            {% else %}
-            <div class="container-biomasa">
-                <div class="left-biomasa">
-                    {% if proceso.total_masa_rsu <= 0 %} <h1>Módulo Residuos Sólidos Urbanos (RSU)</h1>
-                        En módulo RSU se determinará la masa de residuo generado y el Potencial energético de los RSU ,
-                        a partir de los datos ingresados. Se dan 2 opciones para su cálculo:
-                        <ol>
-                            <li>Ingresando cantidad de residuos generados [ton/año] ó </li>
-                            <li>Ingresando cantidad de habitantes y seleccionando región donde se ubica. </li>
-                        </ol>
-
-                        <div class="inputs">
-                            <strong>¿ Conoce la cantidad de RSU generados al año para el proyecto de energía? </strong>
-                            Indique "No" para hacer una estimación de la cantidad de residuo.
+                                <tr>
+                                    <td>Pacifica </td>
+                                    <td>0,66</td>
+                                </tr>
+                                </tr>
+                            </table>
                         </div>
+                        <p>
+                        Es fundamental tener en cuenta las restricciones que existen al utilizar RSUO en la generación de
+                        energía:
+                        <li>
+                            Distancia máxima entre CGD y fuente de biomasa: La falta de separación en los Residuos
+                            Sólidos
+                            Urbanos (RSU) resulta en altos niveles de humedad y un volumen significativo. Esta mezcla
+                            heterogénea dificulta su manejo eficiente.
+                            Se recomienda que la distancia entre el centro de Generación de Energía y la biomasa sea
+                            <strong> inferior a 2 km </strong>, debido a diversos factores que afectan el transporte de
+                            la biomasa por costos logísticos elevados, los requisitos de permisos ambientales y
+                            consideraciones sociales,entre otros. Es importante respetar esta distancia para garantizar
+                            un proceso eficiente y
+                            minimizar los impactos negativos asociados al manejo de residuos solidos urbanos en la
+                            producción de energía.
 
-                        <button id="btnSi" class="button">Sí</button>
-                        <button id="btnNo" class="button">No</button>
+                        </li>
+                        </p>
+                        <strong> 
+                            Evalue si la biomasa residual soporta la restricción anteriormente expuesta y responda:
+                            <br>
+                            ¿Dispone de Residuos Sólidos Urbanos (RSU) para el proyecto de energía? 
+                        </strong>
+                    </div>
+                    <button class="button" type="submit" name="respuesta" value="True">Sí</button>
+                    <button class="button" type="submit" name="respuesta" value="False">No</button>
+                </form>
 
-                        <div id="divNo" class="oculto">
-                            <form action="{% url 'rsu' proceso.id %}" method="post">
-                                {% csrf_token %}
-                                <div class="inputs">
-                                    <strong>Ingrese cantidad de habitantes: </strong> {{form1.cant_personas}}
-                                    <strong>Seleccione región de Colombia: </strong> {{form1.region}}
-                                </div>
-                                <button type="submit" class="button">Añadir Biomasa</button>
-                            </form>
-                        </div>
-
-                        <div id="divSi" class="oculto">
-                            <form action="{% url 'rsu' proceso.id %}" method="post">
-                                {% csrf_token %}
-                                <div class="inputs">
-                                    <strong>Ingrese cantidad de RSU (ton/año): </strong> {{form2.masa_RSU}}
-                                </div>
-                                <button type="submit" class="button">Añadir Biomasa</button>
-                            </form>
-                        </div>
-                </div>
                 {% else %}
-                <div class="right-agricola">
-                    <h1>Resultados Residuos Sólidos Urbanos (RSU)</h1>
-                    <p>En la siguente tabla se muestran los resultados de masa de residuo y potencial energético
-                        calculado:</p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nº</th>
+                <div class="container-biomasa">
+                    {% if proceso.total_masa_rsu <= 0 %}
+                    <div class="left-biomasa">
+                         <h1>Módulo Residuos Sólidos Urbanos (RSU)</h1>
+                            En módulo RSU se determinará la masa de residuo generado y el Potencial energético de los RSU ,
+                            a partir de los datos ingresados. Se dan 2 opciones para su cálculo:
+                            <ol>
+                                <li>Ingresando cantidad de residuos generados [ton/año] ó </li>
+                                <li>Ingresando cantidad de habitantes y seleccionando región donde se ubica. </li>
+                            </ol>
 
-                                <th>Cantidad de habitantes</th>
+                            <div class="inputs">
+                                <strong>¿ Conoce la cantidad de RSU generados al año para el proyecto de energía? </strong>
+                                Indique "No" para hacer una estimación de la cantidad de residuo.
+                            </div>
 
-                                <th>Masa RSU [ton/año]</th>
-                                <th>Potencial energético Termoquímico [MWh/año]</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for biomasa in proceso.biomasa_rsu.all %}
-                            <tr>
-                                <td>{{ forloop.counter }}</td>
-                                {% if biomasa.cant_personas %}
-                                <td>{{ biomasa.cant_personas }}</td>
-                                {% endif %}
-                                <td>{{ biomasa.masa_RSU|floatformat:2 }}</td>
-                                <td>{{ biomasa.pot_rt_termo_rsu|floatformat:3 }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    <a href="{% url 'rsuo' proceso.id %}"><button class="button">Guardar y continuar</button></a>
+                            <button id="btnSi" class="button">Sí</button>
+                            <button id="btnNo" class="button">No</button>
+
+                            <div id="divNo" class="oculto">
+                                <form action="{% url 'rsu' proceso.id %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="inputs">
+                                        <strong>Ingrese cantidad de habitantes: </strong> {{form1.cant_personas}}
+                                        <strong>Seleccione región de Colombia: </strong> {{form1.region}}
+                                    </div>
+                                    <button type="submit" class="button">Añadir Biomasa</button>
+                                </form>
+                            </div>
+
+                            <div id="divSi" class="oculto">
+                                <form action="{% url 'rsu' proceso.id %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="inputs">
+                                        <strong>Ingrese cantidad de RSU (ton/año): </strong> {{form2.masa_RSU}}
+                                    </div>
+                                    <button type="submit" class="button">Añadir Biomasa</button>
+                                </form>
+                            </div>
+                    </div>
+                    {% else %}
+                    <div class="right-agricola">
+                        <h1>Resultados Residuos Sólidos Urbanos (RSU)</h1>
+                        <p>En la siguente tabla se muestran los resultados de masa de residuo y potencial energético
+                            calculado:</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nº</th>
+
+                                    <th>Cantidad de habitantes</th>
+
+                                    <th>Masa RSU [ton/año]</th>
+                                    <th>Potencial energético Termoquímico [MWh/año]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for biomasa in proceso.biomasa_rsu.all %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    {% if biomasa.cant_personas %}
+                                    <td>{{ biomasa.cant_personas }}</td>
+                                    {% endif %}
+                                    <td>{{ biomasa.masa_RSU|floatformat:2 }}</td>
+                                    <td>{{ biomasa.pot_rt_termo_rsu|floatformat:3 }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <a href="{% url 'rsuo' proceso.id %}"><button class="button">Guardar y continuar</button></a>
+                    </div>
+                    {% endif %}
                 </div>
                 {% endif %}
             </div>
-            {% endif %}
         </div>
-    </div>
-</body>
+    </body>
 
 </html>

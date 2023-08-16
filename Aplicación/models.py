@@ -81,7 +81,7 @@ class Proceso(models.Model):
     rsuo = models.BooleanField(default=False)
 
     # Viabilidad
-    region_choice = (('amazonia','Amazonia'),('orinoquia','Orinoquia'),('pacifica','Pacifica'),)
+    region_choice = (('amazonia','Amazonía'),('orinoquia','Orinoquía'),('pacifica','Pacífica'),)
     region = models.CharField(choices=region_choice, max_length=100, null=True, blank=True)
     distancia = models.FloatField(null=True, blank=True)
     resultado_choice = (('viable','Viable'),('inviable','Inviable'),)

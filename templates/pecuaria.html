@@ -58,18 +58,30 @@
                 <button class="button" type="submit" name="respuesta" value="False">No</button>
             </form>
             {% else %}
+
+            <div>
+                    
+                <h1>Módulo Biomasa residual Pecuaria</h1>
+
+                <p> 
+                    En módulo Pecuaria se determinará la masa de residuo generado y el Potencial energético de la
+                    biomasa residual pecuaria. <br>
+                    Las especies pecuarias consideradas, inicialmente, en este programa son: bovinos, bufalinos,
+                    porcinos, ovinos caprinos, equinos y aves pertenecientes al sector avícola, que corresponde a
+                    las más representativas de Colombia.
+                    Seleccione animal de cultivo, tipo e ingrese cantidad de animales, datos que permitirán obtener
+                    la masa de residuo disponible para emplear en el proyecto de bioenergía.
+
+                </p>
+
+            </div>
             <div class="container-biomasa">
-                <div class=>
-                    <h1>Módulo Biomasa residual Pecuaria</h1>
+
+                <div class="left-biomasa">
+                    
                     <form action="{% url 'pecuaria' proceso.id %}" method="post">
                         {% csrf_token %}
-                        En módulo Pecuaria se determinará la masa de residuo generado y el Potencial energético de la
-                        biomasa residual pecuaria. <br>
-                        Las especies pecuarias consideradas, inicialmente, en este programa son: bovinos, bufalinos,
-                        porcinos, ovinos caprinos, equinos y aves pertenecientes al sector avícola, que corresponde a
-                        las más representativas de Colombia.
-                        Seleccione animal de cultivo, tipo e ingrese cantidad de animales, datos que permitirán obtener
-                        la masa de residuo disponible para emplear en el proyecto de bioenergía.
+                    
                         <div class="inputs">
                             <strong>Seleccione Animal: </strong> {{form.animal}}
                             <strong>Seleccione tipo de Animal: </strong> {{form.tipo}}
@@ -78,6 +90,7 @@
                         <button type="submit" class="button">Añadir Biomasa</button>
                     </form>
                 </div>
+
                 <div class="right-biomasa">
                     <h1>Resultados</h1>
                     <p>En la siguente tabla se muestran la masa de residuo y potencial energético de la biomasa
