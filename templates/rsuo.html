@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Biomasa RSUO</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script defer src="{% static 'js/script.js' %}"></script>
+</head>
+
+<body>
+    {% include 'includes/header.html' %}
+    <div class="container">
+        {% include 'includes/items.html' %}
+        <div class="right">
+            {% if not proceso.rsuo %}
+            <h1> Módulo Residuos Sólidos Urbanos Organicos (RSUO)</h1>
+            <form action="{% url 'rsuo_pregunta' proceso.id %}" method="post">
+                {% csrf_token %}
+                <div class="inputs">
+                    En módulo RSUO se determinará la masa de residuo generado y el Potencial energético de los residuos
+                    solidos urbanos organicos RSUO, a partir de los datos ingresados masa del residuo al año. <br>
+                    Los residuos solidos urbanos organicos son desechos biodegradables de origen vegetal o animal que se
+                    generan en entornos urbanos. Aqui se considera la biomasa organica como tales como Excretas humanas,
+                    residuos de frutas y verduras(comunmente encontradas plaza de mercado) y residuos de Poda.
+                    La biomasa residuos solidos urbanos organicos suelen transformarse en energía y productos
+                    aprovechables de compost a través de procesos bioquímicos (Digestión Anaerobia).
+                    <br>
+                    Es fundamental tener en cuenta las restricciones que existen al utilizar RSUO en la generación de
+                    energía:
+                    <ol>
+                        <li>
+                            Distancia máxima entre CGD y fuente de biomasa: Se recomienda que la distancia entre el
+                            Centro de Generación de Energía y la biomasa sea <strong> inferior a 2 km </strong>. Esta
+                            restricción se debe a diversos factores que afectan el transporte de la biomasa tales como
+                            la pérdida de calidad,
+                            el aumento de los costos, los requisitos de permisos ambientales y consideraciones sociales,
+                            entre otros. Es importante respetar esta distancia para garantizar un proceso eficiente y
+                            minimizar los impactos negativos asociados al manejo de RSUO en la producción de energía.
+                        </li>
+
+                        <li>
+                            Disponibilidad del recurso hídrico: La biodigestión requiere una cantidad significativa de
+                            agua para mantener la actividad microbiológica y la hidratación del material. A modo de
+                            referencia general, en muchos casos prácticos,los biodigestores suelen ubicarse a distancias
+                            que no superan los <STRONg>500 metros </STRONg>o incluso menos,desde la fuente de los RSUO.
+                        </li>
+                    </ol>
+                    <strong> Evalue si la biomasa residual soporta la restricción 1 y 2, responda:
+                        <br>
+                        ¿Dispone de Biomasa RSUO para el proyecto de energía?</strong>
+                </div>
+                <button class="button" type="submit" name="respuesta" value="True">Sí</button>
+                <button class="button" type="submit" name="respuesta" value="False">No</button>
+            </form>
+            {% else %}
+            <div class="container-biomasa">
+                <div class="left-biomasa">
+                    <h1> Módulo Residuos Sólidos Urbanos Organicos (RSUO)</h1>
+                    <form action="{% url 'rsuo' proceso.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="inputs">
+                            <P>
+                                En módulo RSUO se determinará el Potencial energético de la
+                                biomasa residual RSUO, de acuerdo a la masa de residuo ingresado. <br>
+                                Seleccione el tipo de residuo y la cantidad de residuo generados al año.
+                            </P>
+
+                            <strong>Seleccione tipo de RSOU: </strong> {{form.tipo}}
+                            <strong>Ingrese cantidad de RSUO [ton/año]: </strong> {{form.masa_RSUO}}
+                        </div>
+                        <button type="submit" class="button">Añadir</button>
+                    </form>
+                </div>
+                <div class="right-agricola">
+                    <h1>Resultados</h1>
+                    <p>En la siguente tabla se muestran los resultados de las biomasas RSUO añadidas</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>Residuo</th>
+                                <th>Masa RSUO [ton/año]</th>
+                                <th>Potencial energético Bioquímico [MWh/año]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for biomasa in proceso.biomasa_rsuo.all %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ biomasa.tipo_rsuo.tipo}}</td>
+                                <td>{{ biomasa.masa_RSUO}}</td>
+                                <td>{{ biomasa.pot_rt_bioq_rsuo|floatformat:2 }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="2">Total:</th>
+                                <td> {{ proceso.total_masa_rsuo }} </td>
+                                <td> {{ proceso.total_pot_rt_bioq_rsuo|floatformat:3 }} </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    {% if proceso.total_masa_rsuo > 0 %}
+                    <a href="{% url 'demanda' proceso.id %}"><button class="button">Guardar y continuar</button></a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>

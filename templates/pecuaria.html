@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Biomasa Residual Pecuaria</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    {% include 'includes/header.html' %}
+    <div class="container">
+        {% include 'includes/items.html' %}
+        <div class="right">
+            {% if not proceso.pecuaria %}
+            <h1>Pecuaria</h1>
+            <form action="{% url 'pecuaria_pregunta' proceso.id %}" method="post">
+                {% csrf_token %}
+                <div class="inputs">
+                    En módulo Pecuaria se determinará la masa de residuo generado y el Potencial energético de la
+                    biomasa residual pecuaria, a partir de los datos ingresados Animal de cultivo, tipo y cantidad. <br>
+                    La biomasa considerada es toda aquella conformada por los subproductos (estiercol generado) de la
+                    actividad pecuaria.[Arboleda y otros, 2020]
+                    Las especies pecuarias consideradas en este programa son: bovinos, bufalinos,
+                    porcinos, ovinos caprinos, equinos y aves pertenecientes al sector avícola, que corresponde a
+                    las más representativas de Colombia. La biomasa residual Pecuaria suele transformarse en energía y
+                    productos aprovechables de compost a través de procesos bioquímicos (Digestión Anaerobia).
+                    <br>
+                    Es fundamental tener en cuenta las restricciones que existen al utilizar residuos pecuarios en
+                    la generación de energía:
+                    <ol>
+                        <li>
+                            Distancia máxima entre CGD y fuente de biomasa: Se recomienda que la distancia entre el
+                            Centro de Generación de Energía y la biomasa sea <strong> inferior a 2 km </strong>. Esta
+                            restricción se debe a diversos factores que afectan el transporte de la biomasa tales como
+                            la pérdida de calidad,
+                            el aumento de los costos, los requisitos de permisos ambientales y consideraciones sociales,
+                            entre otros. Es importante respetar esta distancia para garantizar un proceso eficiente y
+                            minimizar los impactos negativos asociados al manejo de residuos pecuarios en la producción
+                            de energía.
+                        </li>
+
+                        <li>
+                            Disponibilidad del recurso hídrico: La biodigestión requiere una cantidad significativa de
+                            agua para mantener la actividad microbiológica y la hidratación del material. A modo de
+                            referencia general, en muchos casos prácticos,los biodigestores suelen ubicarse a distancias
+                            que no superan los <STRONg>500 metros </STRONg> o incluso menos,desde la fuente de biomasa
+                            pecuaria.
+                        </li>
+                    </ol>
+                    <strong> Evalue si la biomasa residual soporta la restricción 1 y 2, responda:
+                        <br>
+                        ¿Dispone de Biomasa Residual Pecuaria para el proyecto de energía?</strong>
+
+                </div>
+                <button class="button" type="submit" name="respuesta" value="True">Sí</button>
+                <button class="button" type="submit" name="respuesta" value="False">No</button>
+            </form>
+            {% else %}
+            <div class="container-biomasa">
+                <div class=>
+                    <h1>Módulo Biomasa residual Pecuaria</h1>
+                    <form action="{% url 'pecuaria' proceso.id %}" method="post">
+                        {% csrf_token %}
+                        En módulo Pecuaria se determinará la masa de residuo generado y el Potencial energético de la
+                        biomasa residual pecuaria. <br>
+                        Las especies pecuarias consideradas, inicialmente, en este programa son: bovinos, bufalinos,
+                        porcinos, ovinos caprinos, equinos y aves pertenecientes al sector avícola, que corresponde a
+                        las más representativas de Colombia.
+                        Seleccione animal de cultivo, tipo e ingrese cantidad de animales, datos que permitirán obtener
+                        la masa de residuo disponible para emplear en el proyecto de bioenergía.
+                        <div class="inputs">
+                            <strong>Seleccione Animal: </strong> {{form.animal}}
+                            <strong>Seleccione tipo de Animal: </strong> {{form.tipo}}
+                            <strong>Ingrese cantidad de animales: </strong> {{form.cantidad}}
+                        </div>
+                        <button type="submit" class="button">Añadir Biomasa</button>
+                    </form>
+                </div>
+                <div class="right-biomasa">
+                    <h1>Resultados</h1>
+                    <p>En la siguente tabla se muestran la masa de residuo y potencial energético de la biomasa
+                        pecuaria añadida: </p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>Animal Cultivo</th>
+                                <th>Tipo animal</th>
+                                <th>Cantidad animales</th>
+                                <th>Masa Pecuaria [ton/año]</th>
+                                <th>Potencial energético Bioquímico [MWh/año]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for biomasa in proceso.biomasa_pecuaria.all %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ biomasa.residuo_pecuario.animal }}</td>
+                                <td>{{ biomasa.residuo_pecuario.tipo }}</td>
+                                <td>{{ biomasa.cantidad|floatformat:0 }}</td>
+                                <td>{{ biomasa.masa_pecuaria|floatformat:3 }}</td>
+                                <td>{{ biomasa.pot_rt_bioq_pecu|floatformat:3 }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="3">Total:</th>
+                                <td> {{ proceso.total_cantidad|floatformat:0 }} </td>
+                                <td> {{ proceso.total_masa_pecuaria|floatformat:3 }} </td>
+                                <td> {{ proceso.total_pot_rt_bioq_pecu|floatformat:3 }} </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    {% if proceso.total_cantidad > 0 %}
+                    <a href="{% url 'rsu' proceso.id %}"><button class="button">Guardar y continuar</button></a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>

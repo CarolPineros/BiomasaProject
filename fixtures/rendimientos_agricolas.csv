@@ -1,0 +1,226 @@
+﻿Region;Departamento;Cultivo;RC
+amazonia;Caquetá;Arroz;1.214
+pacifica;Cauca;Arroz;3.701
+pacifica;Chocó;Arroz;1.805
+orinoquia;Meta;Arroz;5.401
+pacifica;Nariño;Arroz;0.588
+pacifica;Valle del Cauca;Arroz;6.705
+orinoquia;Arauca;Arroz;3.892
+orinoquia;Casanare;Arroz;5.361
+amazonia;Putumayo;Arroz;1.226
+amazonia;Amazonas;Arroz;1.357
+amazonia;Guainía;Arroz;3.884
+amazonia;Guaviare;Arroz;0.811
+amazonia;Vaupés;Arroz;0.75
+orinoquia;Vichada;Arroz;1.364
+general;Otro;Arroz;3.884
+amazonia;Caquetá;Banano;11.873
+pacifica;Cauca;Banano;5.011
+pacifica;Chocó;Banano;11.873
+orinoquia;Meta;Banano;2
+pacifica;Nariño;Banano;5.457
+pacifica;Valle del Cauca;Banano;10.483
+orinoquia;Arauca;Banano;11.873
+orinoquia;Casanare;Banano;20
+amazonia;Putumayo;Banano;5.711
+amazonia;Amazonas;Banano;11.873
+amazonia;Guainía;Banano;11.873
+amazonia;Guaviare;Banano;11.873
+amazonia;Vaupés;Banano;11.873
+orinoquia;Vichada;Banano;11.873
+general;Otro;Banano;11.873
+amazonia;Caquetá;Café;0.816
+pacifica;Cauca;Café;1.11
+pacifica;Chocó;Café;0.708
+orinoquia;Meta;Café;0.647
+pacifica;Nariño;Café;1.201
+pacifica;Valle del Cauca;Café;0.875
+orinoquia;Arauca;Café;1.024
+orinoquia;Casanare;Café;0.637
+amazonia;Putumayo;Café;1.15
+amazonia;Amazonas;Café;1.024
+amazonia;Guainía;Café;1.024
+amazonia;Guaviare;Café;1.024
+amazonia;Vaupés;Café;1.024
+orinoquia;Vichada;Café;1.024
+general;Otro;Café;1.024
+amazonia;Caquetá;Caña de azúcar;11.277
+pacifica;Cauca;Caña de azúcar;11.313
+pacifica;Chocó;Caña de azúcar;11.277
+orinoquia;Meta;Caña de azúcar;11.277
+pacifica;Nariño;Caña de azúcar;11.277
+pacifica;Valle del Cauca;Caña de azúcar;12.692
+orinoquia;Arauca;Caña de azúcar;11.277
+orinoquia;Casanare;Caña de azúcar;11.277
+amazonia;Putumayo;Caña de azúcar;11.277
+amazonia;Amazonas;Caña de azúcar;11.277
+amazonia;Guainía;Caña de azúcar;11.277
+amazonia;Guaviare;Caña de azúcar;11.277
+amazonia;Vaupés;Caña de azúcar;11.277
+orinoquia;Vichada;Caña de azúcar;11.277
+general;Otro;Caña de azúcar;11.277
+amazonia;Caquetá;Caña para panela;5.312
+pacifica;Cauca;Caña para panela;5.409
+pacifica;Chocó;Caña para panela;16.511
+orinoquia;Meta;Caña para panela;6.918
+pacifica;Nariño;Caña para panela;7.757
+pacifica;Valle del Cauca;Caña para panela;5.667
+orinoquia;Arauca;Caña para panela;3.42
+orinoquia;Casanare;Caña para panela;6.598
+amazonia;Putumayo;Caña para panela;2.773
+amazonia;Amazonas;Caña para panela;6.598
+amazonia;Guainía;Caña para panela;6.598
+amazonia;Guaviare;Caña para panela;6.598
+amazonia;Vaupés;Caña para panela;6.598
+orinoquia;Vichada;Caña para panela;4.389
+general;Otro;Caña para panela;6.598
+amazonia;Caquetá;Maíz;0.919
+pacifica;Cauca;Maíz;1.808
+pacifica;Chocó;Maíz;1.654
+orinoquia;Meta;Maíz;3.46
+pacifica;Nariño;Maíz;1.558
+pacifica;Valle del Cauca;Maíz;5.003
+orinoquia;Arauca;Maíz;1.708
+orinoquia;Casanare;Maíz;1.692
+amazonia;Putumayo;Maíz;1.203
+amazonia;Amazonas;Maíz;2.049
+amazonia;Guainía;Maíz;1.5
+amazonia;Guaviare;Maíz;1.14
+amazonia;Vaupés;Maíz;0.934
+orinoquia;Vichada;Maíz;1.958
+general;Otro;Maíz;2.049
+amazonia;Caquetá;Palma de aceite;1.4
+pacifica;Cauca;Palma de aceite;3.929
+pacifica;Chocó;Palma de aceite;6.5
+orinoquia;Meta;Palma de aceite;2.747
+pacifica;Nariño;Palma de aceite;4.8
+pacifica;Valle del Cauca;Palma de aceite;3.929
+orinoquia;Arauca;Palma de aceite;3.929
+orinoquia;Casanare;Palma de aceite;1.773
+amazonia;Putumayo;Palma de aceite;3.929
+amazonia;Amazonas;Palma de aceite;3.929
+amazonia;Guainía;Palma de aceite;3.929
+amazonia;Guaviare;Palma de aceite;3.929
+amazonia;Vaupés;Palma de aceite;3.929
+orinoquia;Vichada;Palma de aceite;3.929
+general;Otro;Palma de aceite;3.929
+amazonia;Caquetá;Plátano;6.278
+pacifica;Cauca;Plátano;9.203
+pacifica;Chocó;Plátano;5.962
+orinoquia;Meta;Plátano;15.013
+pacifica;Nariño;Plátano;6.787
+pacifica;Valle del Cauca;Plátano;9.398
+orinoquia;Arauca;Plátano;7.836
+orinoquia;Casanare;Plátano;13.242
+amazonia;Putumayo;Plátano;6.594
+amazonia;Amazonas;Plátano;2.997
+amazonia;Guainía;Plátano;7.5
+amazonia;Guaviare;Plátano;6.337
+amazonia;Vaupés;Plátano;6
+orinoquia;Vichada;Plátano;4.113
+general;Otro;Plátano;7.782
+amazonia;Caquetá;Frijol;1.24
+pacifica;Cauca;Frijol;1.24
+pacifica;Chocó;Frijol;1.24
+orinoquia;Meta;Frijol;1.24
+pacifica;Nariño;Frijol;1.08
+pacifica;Valle del Cauca;Frijol;1.24
+orinoquia;Arauca;Frijol;1.24
+orinoquia;Casanare;Frijol;1.24
+amazonia;Putumayo;Frijol;1.24
+amazonia;Amazonas;Frijol;1.24
+amazonia;Guainía;Frijol;1.24
+amazonia;Guaviare;Frijol;1.24
+amazonia;Vaupés;Frijol;1.24
+orinoquia;Vichada;Frijol;1.24
+general;Otro;Frijol;1.24
+amazonia;Caquetá;Maní;0.8
+pacifica;Cauca;Maní;0.8
+pacifica;Chocó;Maní;0.8
+orinoquia;Meta;Maní;0.8
+pacifica;Nariño;Maní;0.8
+pacifica;Valle del Cauca;Maní;0.8
+orinoquia;Arauca;Maní;0.8
+orinoquia;Casanare;Maní;0.8
+amazonia;Putumayo;Maní;0.8
+amazonia;Amazonas;Maní;0.8
+amazonia;Guainía;Maní;0.8
+amazonia;Guaviare;Maní;0.8
+amazonia;Vaupés;Maní;0.8
+orinoquia;Vichada;Maní;0.8
+general;Otro;Maní;0.8
+amazonia;Caquetá;Soya;2.28
+pacifica;Cauca;Soya;2.28
+pacifica;Chocó;Soya;2.28
+orinoquia;Meta;Soya;2.75
+pacifica;Nariño;Soya;2.28
+pacifica;Valle del Cauca;Soya;2.75
+orinoquia;Arauca;Soya;2.28
+orinoquia;Casanare;Soya;2.28
+amazonia;Putumayo;Soya;2.28
+amazonia;Amazonas;Soya;2.28
+amazonia;Guainía;Soya;2.28
+amazonia;Guaviare;Soya;2.28
+amazonia;Vaupés;Soya;2.28
+orinoquia;Vichada;Soya;2.28
+general;Otro;Soya;2.28
+amazonia;Caquetá;Trigo;2.5
+pacifica;Cauca;Trigo;2.5
+pacifica;Chocó;Trigo;2.5
+orinoquia;Meta;Trigo;2.5
+pacifica;Nariño;Trigo;2.15
+pacifica;Valle del Cauca;Trigo;2.5
+orinoquia;Arauca;Trigo;2.5
+orinoquia;Casanare;Trigo;2.5
+amazonia;Putumayo;Trigo;2.5
+amazonia;Amazonas;Trigo;2.5
+amazonia;Guainía;Trigo;2.5
+amazonia;Guaviare;Trigo;2.5
+amazonia;Vaupés;Trigo;2.5
+orinoquia;Vichada;Trigo;2.5
+general;Otro;Trigo;2.5
+amazonia;Caquetá;Yuca;7.18
+pacifica;Cauca;Yuca;12.09
+pacifica;Chocó;Yuca;9.72
+orinoquia;Meta;Yuca;19.76
+pacifica;Nariño;Yuca;8.29
+pacifica;Valle del Cauca;Yuca;16.43
+orinoquia;Arauca;Yuca;19.86
+orinoquia;Casanare;Yuca;13.59
+amazonia;Putumayo;Yuca;6.34
+amazonia;Amazonas;Yuca;6.74
+amazonia;Guainía;Yuca;10
+amazonia;Guaviare;Yuca;13
+amazonia;Vaupés;Yuca;5.87
+orinoquia;Vichada;Yuca;11.01
+general;Otro;Yuca;11.34
+amazonia;Caquetá;Algodón;0.97
+pacifica;Cauca;Algodón;0.97
+pacifica;Chocó;Algodón;0.97
+orinoquia;Meta;Algodón;0.97
+pacifica;Nariño;Algodón;0.97
+pacifica;Valle del Cauca;Algodón;1.05
+orinoquia;Arauca;Algodón;0.97
+orinoquia;Casanare;Algodón;0.97
+amazonia;Putumayo;Algodón;0.97
+amazonia;Amazonas;Algodón;0.97
+amazonia;Guainía;Algodón;0.97
+amazonia;Guaviare;Algodón;0.97
+amazonia;Vaupés;Algodón;0.97
+orinoquia;Vichada;Algodón;0.74
+general;Otro;Algodón;0.97
+amazonia;Caquetá;Coco;7.2
+pacifica;Cauca;Coco;9
+pacifica;Chocó;Coco;12
+orinoquia;Meta;Coco;7.2
+pacifica;Nariño;Coco;7
+pacifica;Valle del Cauca;Coco;7.2
+orinoquia;Arauca;Coco;7.2
+orinoquia;Casanare;Coco;7.2
+amazonia;Putumayo;Coco;7.2
+amazonia;Amazonas;Coco;7.2
+amazonia;Guainía;Coco;7.2
+amazonia;Guaviare;Coco;7.2
+amazonia;Vaupés;Coco;7.2
+orinoquia;Vichada;Coco;7.2
+general;Otro;Coco;7.2

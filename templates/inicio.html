@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Inicio</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+  {% include 'includes/header.html' %}
+  <div class="container">
+    {% include 'includes/items.html' %}
+    <div class="right">
+      <h1>Pasos para el desarrollo del programa</h1>
+      <p> Este programa se desarrolla de forma secuencial, por esto se describen los pasos que se realizaran para la
+        obtención de resultados: </p>
+      <ol>
+        <li>Ingresa la distancia de la biomasa residual al punto donde esta proyectada la central de generación
+          distribuida</li>
+        <li>Ingresa la biomasa disponible dentro de la distancia indicada, para determinar potencial energético
+          economico </li>
+        <ul>
+          <li>Biomasa residual Agricola</li>
+          <li>Biomasa residual Pecuaria</li>
+          <li>Biomasa residual RSU</li>
+          <li>Biomasa residual RSUO </li>
+        </ul>
+        </li>
+        <li>Ingresa demanda energética del centro de consumo al que se proyecta abastecer de energía. </li>
+        <li>Evalúa resultados: Ruta tecnológica, tecnología y cantidad de plantas recomendadas y estimación de costos.
+        </li>
+      </ol>
+
+      <a href="{% url 'iniciar_proceso' %}"><button class="button">Iniciar Proceso</button></a>
+
+    </div>
+  </div>
+</body>
+
+</html>

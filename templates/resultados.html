@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    {% include 'includes/header.html' %}
+    <div class="container">
+        {% include 'includes/items.html' %}
+        <div class="right">
+            <h1>RESULTADOS </h1>
+            <p>A continuación se muestra los resultados obtenidos con la biomasa ingresada. potencial obtenido de la
+                biomasa disponible ingresada, que ruta
+                tecnologica se recomienda para cada una, que potencial se puede obtener por cada ruta y cubrimiento
+                estimado segun la demanda energética. </p>
+            <table>
+                <tr>
+                    <th colspan="2"> RESULTADOS SELECCIÓN TÉCNOLOGICA</th>
+                </tr>
+                <tr>
+                    <th>Ruta tecnológica recomendada</th>
+                    <td>{{ proceso.rt_final }}</td>
+                </tr>
+                <tr>
+                    <th>Tecnología recomendada</th>
+                    <td>{{ proceso.tec_final }}</td>
+                </tr>
+                <tr>
+                    <th>Capacidad de planta [MW]</th>
+                    <td>{{ proceso.cap_planta }}</td>
+                </tr>
+                <tr>
+                    <th>Cantidad de plantas</th>
+                    <td>{{ proceso.cant_plantas }}</td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <th>Observación</th>
+                    <td>{{ proceso.comentario }}</td>
+                </tr>
+            </table>
+
+            
+
+
+            {% if proceso.rt_final == 'Termoquimica' %}
+            <table>
+                <tr>
+                    <th>TIPO RESIDUO</th>
+                    <th>POTENCIAL ENERGÉTICO [MWh/AÑO]</th>
+                    <th>MASA DE RESIDUOS [ton/AÑO]</th>
+                </tr>
+                <tr>
+                    <td>Biomasa residual agricola</td>
+                    <td>{{proceso.total_pot_rt_termo_agri|floatformat:2}}</td>
+                    <td>{{proceso.masa_agricola_seca|floatformat:2}}</td>
+                </tr>
+                <tr>
+                    <td>Biomasa Residuos solidos urbanos RSU</td>
+                    <td>{{proceso.total_pot_rt_termo_rsu|floatformat:2}}</td>
+                    <td>{{proceso.total_masa_rsu|floatformat:2}}</td>
+                </tr>
+                <tr>
+                    <td>Total Potencial energético </td>
+                    <td>{{proceso.pot_teo_termo|floatformat:2}}</td>
+                    <td>{{proceso.biomasa_seca|floatformat:2}}</td>
+                </tr>
+                <tr>
+                    <td>Total Potencial energético técnico</td>
+                    <td>{{proceso.pot_tec_termo|floatformat:2}}</td>
+                    <td></td>
+                </tr>
+
+            </table>
+
+            <TABLE>
+                <tr>
+                    <th colspan="2">DEMANDA Y COBERTURA ENERGÉTICA DEL USUARIO CON RUTA SELECCIONADA </th>
+                </tr>
+                <tr>
+                    <td>Demanda energética del usuario</td>
+                    <td>{{proceso.ed}}</td>
+
+                </tr>
+                <tr>
+                    <td>Demanda proyectada a 20 años</td>
+                    <td>{{proceso.edf}} </td>
+
+                </tr>
+                <tr>
+                    <td> Cubrimiento energético</td>
+                    <td>{{proceso.cub_rt_termo}} %</td>
+
+                </tr>
+            </TABLE>
+            {% else %}
+            <table>
+                <tr>
+                    <th>TIPO RESIDUO</th>
+                    <th>POTENCIAL ENERGÉTICO [MWh/AÑO]</th>
+                    <th>MASA DE RESIDUOS [ton/AÑO]</th>
+                </tr>
+                <tr>
+                    <td>Biomasa residual agricola</td>
+                    <td>{{proceso.total_pot_rt_bioq_agri|floatformat:2}}</td>
+                    <td>{{proceso.masa_agricola_humeda|floatformat:2}}</td>
+                </tr>
+                <tr>
+                    <td>Biomasa residual pecuaria</td>
+                    <td>{{proceso.total_pot_rt_bioq_pecu|floatformat:2}}</td>
+                    <td>{{proceso.total_masa_pecuaria|floatformat:2}}</td>
+                </tr>
+                <tr>
+                    <td>Biomasa Residuos solidos urbanos organicos RSUO</td>
+                    <td>{{proceso.total_pot_rt_bioq_rsuo|floatformat:2}}</td>
+                    <td>{{proceso.total_masa_rsuo|floatformat:2}}</td>
+                </tr>
+                <tr>
+                    <td>Total Potencial energético economico</td>
+                    <td>{{proceso.pot_teo_bioq|floatformat:2}}</td>
+                    <td>{{proceso.biomasa_seca|floatformat:2}}</td>
+                </tr>
+                <tr>
+                    <td>Total Potencial técnico</td>
+                    <td>{{proceso.pot_tec_bioq|floatformat:2}}</td>
+                    <td></td>
+                </tr>
+
+            </table>
+
+            <TABLE>
+                <tr>
+                    <th colspan="2">DEMANDA Y COBERTURA ENERGÉTICA DEL USUARIO CON RUTA SELECCIONADA </th>
+                </tr>
+                <tr>
+                    <td>Demanda energética del usuario</td>
+                    <td>{{proceso.ed}}</td>
+
+                </tr>
+                <tr>
+                    <td>Demanda proyectada a 20 años</td>
+                    <td>{{proceso.edf}} </td>
+
+                </tr>
+                <tr>
+                    <td>Cubrimiento energético</td>
+                    <td>{{proceso.cub_rt_bioq}} %</td>
+
+                </tr>
+            </TABLE>
+
+
+
+            
+            {% endif %}
+
+            <table>
+                {% if proceso.tipo1 or proceso.tipo2 or proceso.tipo3%}
+                <tr>
+                    <th colspan="2">ESTIMACIÓN DE COSTOS</th>
+                </tr>
+                {% endif %}
+                {% if proceso.tipo1 %}
+                <tr>
+                    <th>Capex - Inversión [COP/AÑO]</th>
+                    <td>$ {{ proceso.capex1|floatformat:0 }}</td>
+                </tr>
+                <tr>
+                    <th>Opex - Operación y mantenimiento [COP/AÑO]</th>
+                    <td>$ {{ proceso.opex1|floatformat:0 }}</td>
+                </tr>
+                {% endif %}
+                {% if proceso.tipo2 %}
+                <tr>
+                    <th>Capex - Inversión [COP/AÑO]</th>
+                    <td>$ {{ proceso.capex2|floatformat:0 }}</td>
+                </tr>
+                <tr>
+                    <th>Opex - Operación y mantenimiento [COP/AÑO]</th>
+                    <td>$ {{ proceso.opex2|floatformat:0 }}</td>
+                </tr>
+                {% endif %}
+                {% if proceso.tipo3 %}
+                <tr>
+                    <th>Capex - Inversión [COP/AÑO]</th>
+                    <td>$ {{ proceso.capex3|floatformat:0 }}</td>
+                </tr>
+                <tr>
+                    <th>Opex - Operación y mantenimiento [COP/AÑO]</th>
+                    <td>$ {{ proceso.opex3|floatformat:0 }}</td>
+                </tr>
+                {% endif %}
+            </table>
+
+            <a href="{% url 'inicio' %}"><button class="button">Iniciar otro proceso</button></a>
+
+        </div>
+    </div>
+</body>
+
+</html>

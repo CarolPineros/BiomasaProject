@@ -1,0 +1,22 @@
+﻿Animal;Tipo;pb;pe;dr
+Avícola;Ponedoras;0.06;0.08;0.962
+Avícola;Engorde;0.06;0.08;0.962
+Bovino;Leche;0.04;8;0.014
+Bovino;Doble propósito;0.04;8;0.014
+Bovino;Carne;0.04;8;0.014
+Bovino;Terneros: Menor a 12 meses;0.04;4;0.014
+Bovino;Entre 12 y 24 meses;0.04;9;0.014
+Bovino;Entre 24 y 36 meses;0.04;14;0.014
+Bovino;Mayor a 36 meses;0.04;18;0.014
+Porcino;Tecnificado;0.07;2;0.657
+Porcino;No tecnificado;0.07;2;0.657
+Porcino;Lechon lactante;0.07;0.28;0.657
+Porcino;Precebos;0.07;1.22;0.657
+Porcino;Levante;0.07;2.19;0.657
+Porcino;Reproductor;0.07;5.62;0.657
+Porcino;Hembra lactante;0.07;7.38;0.657
+Porcino;Hembra gestante;0.07;5.4;0.657
+Bufalina;Bufalina;0.04;12;0.014
+Ovina;Ovina;0.05;1;0.04
+Caprina;Caprina;0.05;1;0.02
+Equina;Equina;0.04;10;0.1

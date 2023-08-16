@@ -1,0 +1,15 @@
+<div class="left">
+        <ul class="list-group">
+            <li class="{% if '/' == request.path %} active {% endif %}">Introducción</li>
+            <li class="{% if '/inicio/' == request.path %} active {% endif %}">Inicio</li>
+            <li><a {% if proceso.id %} href="{% url 'viabilidad' proceso.id %}" {% endif %} class="{% if '/viabilidad/' in request.path %} active {% endif %}">1. Viabilidad</a></li>
+
+            <li>2. Biomasa residual</li>
+            <li><a {% if proceso.id %} href="{% url 'agricola' proceso.id %}" {% endif %} class="{% if '/agricola/' in request.path %} active {% endif %}">2.1 Agricola</a></li>
+            <li><a {% if proceso.id %} href="{% url 'pecuaria' proceso.id %}" {% endif %} class="{% if '/pecuaria/' in request.path %} active {% endif %}">2.2 Pecuaria</a></li>
+            <li><a {% if proceso.id %} href="{% url 'rsu' proceso.id %}" {% endif %} class="{% if '/rsu/' in request.path %} active {% endif %}">2.3 RSU</a></li>
+            <li><a {% if proceso.id %} href="{% url 'rsuo' proceso.id %}" {% endif %} class="{% if '/rsuo/' in request.path %} active {% endif %}">2.4 RSUO</a></li>
+            <li><a {% if proceso.ed %} href="{% url 'demanda' proceso.id %}" {% endif %} class="{% if '/demanda/' in request.path %} active {% endif %}">3. Demanda</a></li>
+            <li><a {% if proceso.rt_final != '' and proceso.id %} href="{% url 'resultados' proceso.id %}" {% endif %} class="{% if '/resultados/' in request.path %} active {% endif %}">4. Resultados</a></li>
+        </ul>
+    </div>

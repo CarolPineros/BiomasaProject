@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Demanda Energética</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script defer src="{% static 'js/script.js' %}"></script>
+</head>
+
+<body>
+    {% include 'includes/header.html' %}
+    <div class="container">
+        {% include 'includes/items.html' %}
+        <div class="right">
+            <div class="container-biomasa">
+                <div>
+                    {% if proceso.ed <= 0 %} <h1>Demanda Energética</h1>
+                        <div class="inputs">
+                            <p> La demanda energética de un centro de consumo abarca toda la energía necesaria para
+                                cubrir todas sus actividades y procesos
+                                en un tiempo especific. Esta demanda puede incluir la electricidad, el calor y otros
+                                tipos de energía requeridos para la iluminación, calefacción, refrigeración, operación
+                                de equipos, sistemas de comunicación y otras funciones esenciales del centro de consumo.
+                            </p>
+                            <p> En el modulo Demanda se realiza una estimacion la demanda energética del centro de
+                                consumo, el cual se
+                                planea abastastecer de energia con el CGD de biomasa. Se estima una demanda energética
+                                proyectada a 20 años y se obtiene la potencia de planta global y unitaria requerida por
+                                el CC.
+
+                            </p>
+
+                            Se dan 2 opciones para su registro:
+                            <ol>
+                                <li>Ingresando demanda energética del centro de consumo [MWh/año] ó </li>
+                                <li>Ingresando cantidad de habitantantes del centro de consumo </li>
+                            </ol>
+
+                            <strong>¿Conoce la demanda energética actual de energía del centro de consumo?
+                                [MWh/año]</strong>
+                            Indique "No" para hacer una estimación de la demanda energética por habitante.
+                        </div>
+
+                        <button id="btnSi" class="button">Sí</button>
+                        <button id="btnNo" class="button">No</button>
+
+                        <div id="divNo" class="oculto">
+                            <form action="{% url 'demanda' proceso.id %}" method="post">
+                                {% csrf_token %}
+                                <div class="inputs">
+                                    <strong>Ingrese cantidad de habitantes: </strong> {{form1.cant_hab}}
+                                </div>
+                                <button type="submit" class="button">Ver Demanda</button>
+                            </form>
+                        </div>
+
+                        <div id="divSi" class="oculto">
+                            <form action="{% url 'demanda' proceso.id %}" method="post">
+                                {% csrf_token %}
+                                <div class="inputs">
+                                    <strong>Ingrese la demanda energética actual: </strong> {{form2.ed}}
+                                </div>
+                                <button type="submit" class="button">Guardar</button>
+                            </form>
+                        </div>
+                </div>
+                {% else %}
+                <h1>Resultados Demanda Energética</h1>
+                <p>A continuación se muestran los resultados de la demanda energética para el centro de consumo</p>
+                <div class="inputs">
+                    <table border="2">
+                        <tr>
+                            <td> <strong>Demanda energética Actual [MWh/año]: </strong> </td>
+                            <td>{{proceso.ed}}</td>
+
+                        </tr>
+                        <tr>
+                            <td> <strong>Demanda energética estimada a 20 años (MWh/año): </strong></td>
+                            <td>{{proceso.edf}}</td>
+
+                        </tr>
+
+
+
+                    </table>
+
+                    <table border="2">
+                        <tr>
+                            <td><strong>Potencia global requerida diariamente por el centro de consumo : </strong> </td>
+                            <td> {{proceso.pot_CGD|floatformat:4}} MW </td>
+                        </tr>
+
+                        <tr>
+                            <td> <strong>Potencia unitaria requerida diariamente por centro del consumo : </strong></td>
+                            <td> {{proceso.Punit_requerida|floatformat:4}} MW </td>
+                        </tr>
+
+                    </table>
+
+
+
+                </div>
+
+                <a href="{% url 'resultados' proceso.id %}"><button class="button">Finalizar proceso y ver resultados </button></a>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
