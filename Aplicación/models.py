@@ -1,4 +1,7 @@
 from django.db import models
+import json  # Importa el módulo JSON
+
+
 
 # Modelos para los residuos
 class Residuos_agricolas(models.Model):
@@ -118,30 +121,78 @@ class Proceso(models.Model):
     edf = models.FloatField(null=True, blank=True, default=0)
     pot_CGD = models.FloatField(null=True, blank=True, default=0)
     Punit_requerida = models.FloatField(null=True, blank=True, default=0)
+    comentario_demanda = models.CharField(max_length=500, null=True, blank=True)
+    Pot_requerida = models.BooleanField(default=False)
 
-    #Resultados
-    biomasa_seca = models.FloatField(null=True, blank=True, default=0)
-    biomasa_humeda = models.FloatField(null=True, blank=True, default=0)
+    #viabilidad rutas D1-D2 - EVAL_RT_HIBRIDA
 
-    rt_final =  models.CharField(max_length=100, null=True, blank=True)
-
+        #RUTA TERMOQUIMICA
     pot_teo_termo = models.FloatField(null=True, blank=True, default=0)
     pot_teo_termo_unit = models.FloatField(null=True, blank=True, default=0)
     pot_tec_termo_planta = models.FloatField(null=True, blank=True, default=0)
     pot_tec_termo = models.FloatField(null=True, blank=True, default=0)
     cub_rt_termo = models.FloatField(null=True, blank=True, default=0)
+    cub_termo100 = models.BooleanField(default=False)
+    Termoquimica = models.BooleanField(default=False)
 
+        #RUTA BIOQUIMICA
     pot_teo_bioq = models.FloatField(null=True, blank=True, default=0)
     pot_teo_bioq_unit = models.FloatField(null=True, blank=True, default=0)
     pot_tec_bioq_planta = models.FloatField(null=True, blank=True, default=0)
     pot_tec_bioq = models.FloatField(null=True, blank=True, default=0)
     cub_rt_bioq = models.FloatField(null=True, blank=True, default=0)
+    cub_bioq100 = models.BooleanField(default=False)
+    Bioquimica = models.BooleanField(default=False)
+
+        #VIABILIDAD RUTA HIBRIDA
+    Pot_CGD_parcial_bioq = models.FloatField(null=True, blank=True, default=0)
+    Pot_CGD_parcial_termo = models.FloatField(null=True, blank=True, default=0)
+    Hibrida = models.BooleanField(default=False)
+    cub_total = models.FloatField(null=True, blank=True, default=0)
+
+
+
+    
+    #DEFINICION DEL CASO
+    caso=models.CharField(max_length=100, null=True, blank=True)
+    rt_final =  models.CharField(max_length=100, null=True, blank=True)
+    comentario = models.CharField(max_length=500, null=True, blank=True)
+
+
+
+    biomasa_seca = models.FloatField(null=True, blank=True, default=0)
+    biomasa_humeda = models.FloatField(null=True, blank=True, default=0)
+
 
     punit = models.FloatField(null=True, blank=True, default=0)
+
+
     tec_final = models.CharField(max_length=100, null=True, blank=True)
+    tec_final1 = models.CharField(max_length=100, null=True, blank=True)
+    tec_final2 = models.CharField(max_length=100, null=True, blank=True)
+
     cap_planta = models.FloatField(null=True, blank=True, default=0)
+    #caso 4
+    cap_planta1 = models.FloatField(null=True, blank=True, default=0)
+    cap_planta2 = models.FloatField(null=True, blank=True, default=0)
+
     cant_plantas = models.IntegerField(null=True, blank=True, default=0)
-    comentario = models.CharField(max_length=500, null=True, blank=True)
+    #caso 4
+    cant_plantas1 = models.IntegerField(null=True, blank=True, default=0)
+    cant_plantas2 = models.IntegerField(null=True, blank=True, default=0)
+
+
+    cap_serializado  = models.TextField() #Es UNA LISTA
+
+    comentario_cantplantas= models.CharField(max_length=500, null=True, blank=True)                  
+    comentario_cubrimiento_planta = models.CharField(max_length=500, null=True, blank=True)
+    #caso 4
+    comentario_cubrimiento_planta1 = models.CharField(max_length=500, null=True, blank=True)
+    comentario_cubrimiento_planta2 = models.CharField(max_length=500, null=True, blank=True)
+    
+
+
+    #COSTOS
 
     tipo1 = models.BooleanField(default=False)
     capex1 = models.FloatField(null=True, blank=True, default=0)

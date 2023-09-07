@@ -19,7 +19,7 @@
             <form action="{% url 'rsuo_pregunta' proceso.id %}" method="post">
                 {% csrf_token %}
                 <div class="inputs">
-                    En módulo RSUO se determinará la masa de residuo generado y el Potencial energético de los residuos
+                <p> En módulo RSUO se determina la masa de residuo generado y el Potencial energético de los residuos
                     solidos urbanos organicos RSUO, a partir de los datos ingresados masa del residuo al año. <br>
                     Los residuos solidos urbanos organicos son desechos biodegradables de origen vegetal o animal que se
                     generan en entornos urbanos. Aqui se considera la biomasa organica como tales como Excretas humanas,
@@ -29,6 +29,9 @@
                     <br>
                     Es fundamental tener en cuenta las restricciones que existen al utilizar RSUO en la generación de
                     energía:
+                </p>
+
+                <h3>RESTRICCIONES</h3>
                     <ol>
                         <li>
                             Distancia máxima entre CGD y fuente de biomasa: Se recomienda que la distancia entre el
@@ -47,25 +50,35 @@
                             que no superan los <STRONg>500 metros </STRONg>o incluso menos,desde la fuente de los RSUO.
                         </li>
                     </ol>
+                        
                     <strong> Evalue si la biomasa residual soporta la restricción 1 y 2, responda:
                         <br>
                         ¿Dispone de Biomasa RSUO para el proyecto de energía?</strong>
                 </div>
                 <button class="button" type="submit" name="respuesta" value="True">Sí</button>
                 <button class="button" type="submit" name="respuesta" value="False">No</button>
+          
             </form>
             {% else %}
+
+            <div>
+                <h1> Módulo Residuos Sólidos Urbanos Organicos (RSUO)</h1>
+
+                <P>
+                    En módulo RSUO se determinará el Potencial energético de la
+                    biomasa residual RSUO, de acuerdo a la masa de residuo ingresado. <br>
+                    Seleccione el tipo de residuo y la cantidad de residuo generados al año.
+                </P>
+  
+            </div>
+
             <div class="container-biomasa">
                 <div class="left-biomasa">
-                    <h1> Módulo Residuos Sólidos Urbanos Organicos (RSUO)</h1>
+                  
                     <form action="{% url 'rsuo' proceso.id %}" method="post">
                         {% csrf_token %}
                         <div class="inputs">
-                            <P>
-                                En módulo RSUO se determinará el Potencial energético de la
-                                biomasa residual RSUO, de acuerdo a la masa de residuo ingresado. <br>
-                                Seleccione el tipo de residuo y la cantidad de residuo generados al año.
-                            </P>
+                        
 
                             <strong>Seleccione tipo de RSOU: </strong> {{form.tipo}}
                             <strong>Ingrese cantidad de RSUO [ton/año]: </strong> {{form.masa_RSUO}}
@@ -74,7 +87,7 @@
                     </form>
                 </div>
                 <div class="right-agricola">
-                    <h1>Resultados</h1>
+                    <h1>Resultados RSUO</h1>
                     <p>En la siguente tabla se muestran los resultados de las biomasas RSUO añadidas</p>
                     <table>
                         <thead>
@@ -103,9 +116,11 @@
                             </tr>
                         </tfoot>
                     </table>
-                    {% if proceso.total_masa_rsuo > 0 %}
-                    <a href="{% url 'demanda' proceso.id %}"><button class="button">Guardar y continuar</button></a>
-                    {% endif %}
+                  
+                   <p> Cuando finalice de ingresar los datos, Click para pasar al siguiente módulo. 
+                   </p>
+                    <a href="{% url 'demanda' proceso.id %}"><button class="button">Finalizar y continuar</button></a>
+                   
                 </div>
             </div>
             {% endif %}

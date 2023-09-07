@@ -13,196 +13,505 @@
     <div class="container">
         {% include 'includes/items.html' %}
         <div class="right">
-            <h1>RESULTADOS </h1>
-            <p>A continuación se muestra los resultados obtenidos con la biomasa ingresada. potencial obtenido de la
-                biomasa disponible ingresada, que ruta
-                tecnologica se recomienda para cada una, que potencial se puede obtener por cada ruta y cubrimiento
-                estimado segun la demanda energética. </p>
-            <table>
-                <tr>
-                    <th colspan="2"> RESULTADOS SELECCIÓN TÉCNOLOGICA</th>
-                </tr>
-                <tr>
-                    <th>Ruta tecnológica recomendada</th>
-                    <td>{{ proceso.rt_final }}</td>
-                </tr>
-                <tr>
-                    <th>Tecnología recomendada</th>
-                    <td>{{ proceso.tec_final }}</td>
-                </tr>
-                <tr>
-                    <th>Capacidad de planta [MW]</th>
-                    <td>{{ proceso.cap_planta }}</td>
-                </tr>
-                <tr>
-                    <th>Cantidad de plantas</th>
-                    <td>{{ proceso.cant_plantas }}</td>
-                </tr>
-            </table>
+        {% if not visual  %}
+            <h1> DEBE INGRESAR ALGUNA BIOMASA RESIDUAL Y DEMANDA ENERGÉTICA PARA OBTENER RESULTADOS</h1>
 
-            <table>
-                <tr>
-                    <th>Observación</th>
-                    <td>{{ proceso.comentario }}</td>
-                </tr>
-            </table>
+
+            <a href="{% url 'inicio' %}"><button class="button">Iniciar de nuevo</button></a>
+
+
+        {% else %}
+            <h1>RESÚMEN DE RESULTADOS</h1>
+                <p> A continuación se muestran los resultados obtenidos: 
+                </p>
+
+
+
+                 
+
+                        <table class="centrado">
+                            <tr>
+                                <th>Observación</th>
+
+                                
+                                <td>{{ proceso.comentario }}</td>
+                            </tr>
+                            <tr>
+                                <th>Caso</th>
+                                <td>{{ proceso.caso }}</td>
+                            </tr>
+                        </table>
+                         
+              
+
+
+                    {% if proceso.caso == 'caso1' or proceso.caso == 'caso2'  or proceso.caso == 'caso3' or proceso.caso == 'caso5' or proceso.caso == 'caso6'%}
+
+                    <table class="centrado">
+                        <tr>
+                            <th colspan="2"> RESULTADOS SELECCIÓN TÉCNOLOGICA</th>
+                        </tr>
+                        <tr>
+                            <th>Ruta tecnológica recomendada</th>
+                            <td>{{ proceso.rt_final }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tecnología recomendada</th>
+                            <td>{{ proceso.tec_final }}</td>
+                        </tr>
+                        <tr>
+                            <th>Potencia de planta [MW]</th>
+                            <td>{{ proceso.cap_planta }}</td>
+                        </tr>
+                        <tr>
+                            <th>Cantidad de plantas</th>
+                            <td>{{ proceso.cant_plantas }}</td>
+                        </tr>
+                        <tr>
+                            <th>Comentario</th>
+                            <td>{{ proceso.comentario_cubrimiento_planta}}</td>
+                        </tr>
+                    </table>
+
+                    
+                    
+                    
+                    {% endif %}
+
+                    {% if proceso.caso == 'caso4' %}
+
+                    <table class="centrado">
+                        <tr>
+                            <th colspan="3"> RESULTADOS SELECCIÓN TÉCNOLOGICA</th>
+                        </tr>
+                        <tr>
+                            <th colspan="3">Ruta tecnológica recomendada : {{ proceso.rt_final }}</th>
+
+                        </tr>
+
+                        <tr>
+                            <th>Ruta tecnológica</th>
+                            <td> Bioquímica</td>
+                            <td> Termoquímica</td>
+                        </tr>
+                        <tr>
+                            <th>Tecnología recomendada</th>
+                            <td>{{ proceso.tec_final1 }}</td>
+                            <td>{{ proceso.tec_final2 }}</td>
+                        </tr>
+                        <tr>
+                            <th>Potencia de planta [MW]</th>
+                            <td>{{ proceso.cap_planta1 }}</td>
+                            <td>{{ proceso.cap_planta2 }}</td>
+                        </tr>
+                        <tr>
+                            <th>Cantidad de plantas</th>
+                            <td>{{ proceso.cant_plantas1 }}</td>
+                            <td>{{ proceso.cant_plantas2 }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Observación</th>
+                            <td>{{ proceso.comentario_cubrimiento_planta1 }}</td>
+                            <td>{{ proceso.comentario_cubrimiento_planta2 }}</td>
+                        </tr>
+                    </table>
+                    
+
+                    <table class="centrado">
+                        <tr>
+                            <th colspan="3"> RANGOS DE POTENCIAS PARA TECNOLOGÍAS </th>
+                        </tr>
+    
+
+                        <tr>
+               
+                            <th> Técnologia</th>
+                            <td> Rangos [MW]</td>
+                        </tr>
+                        <tr>
+                 
+                            <th> Digestión anaerobia - generación de biogas - impulsor MCI </th>
+                            <td> 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0 </td>
+                        </tr>
+
+                        <tr>
+                       
+                            <th> Combustión - Ciclo Rankine Orgánico accionado con turbina axial </th>
+                            <td> 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0 </td>
+                        </tr>
+
+                        <tr>
+            
+                            <th> Combustión - Ciclo Rankine Convencional accionado con turbina axial / Gasificación </th>
+                            <td>1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5, 9.0, 9.5, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50 </td>
+                        </tr>
+
+                        <tr>
+                        
+                            <th> Combustión - Ciclo Rankine Convencional accionado con turbina axial / Gasificación </th>
+                            <td> 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50 </td>
+                        </tr>
+
+
+
+                    </table>
+                    
+                    
+                    {% endif %}
+
+                    
+                
+                    
+                    {% if proceso.caso == 'caso2' or proceso.caso == 'caso4' or proceso.caso == 'caso6' %}
+
+                        
+                
+                        <p>La ruta Termoquímica comprende procesos que aprovechan la energía termica de la biomasa residual. Los procesos termoquímicos para la generación de electricidad a partir de biomasa residual involucran la conversión de la materia orgánica contenida en los residuos en formas de energía aprovechables. Estos procesos pueden incluir la gasificación y la combustión.
+
+                        </p>
+                    {% endif %}
+
+                    
+                    {% if proceso.caso == 'caso1' or proceso.caso == 'caso3' or proceso.caso == 'caso4' or proceso.caso == 'caso5' %}
+
+                                      
+                        <p> La ruta bioquímica para la generación de electricidad a partir de biomasa residual implica la descomposición biológica de la biomasa en un proceso conocido como digestión anaeróbica o fermentación. Se refiere al proceso de transformar biomasa residual, como restos de plantas y desechos orgánicos, en electricidad utilizando reacciones biológicas.  Al generar electricidad a partir de biomasa, se evita que los materiales orgánicos se acumulen como desechos, reduciendo la contaminación y la necesidad de vertederos. 
+                        Es una forma sostenible de generar electricidad a partir el biogas generado, ya que no solo produce energía, sino que también reduce la cantidad de desechos y emisiones gases de efecto invernadero. 
+
+                        </p>
+
+                    {% endif %}
+
+
+
+
+
+
+                    {% if proceso.caso == 'caso2' or proceso.caso == 'caso4' or proceso.caso == 'caso6' %}
+                        <p>
+                        En la siguiente tabla se encuentran los potenciales enérgeticos teóricos y Potencial técnico total obtenidos: 
+                        </p>
+
+                        <table class="centrado">
+                            <tr>
+                                <th colspan="3"> Potenciales por Ruta termoquímica</th>
+                            </tr>
+
+
+                            <tr>
+                                <th>TIPO RESIDUO</th>
+                                <th>POTENCIAL ENERGÉTICO [MWh/AÑO]</th>
+                                <th>MASA DE RESIDUOS [ton/año]</th>
+                            </tr>
+                            <tr>
+                                <td>Biomasa residual agrícola</td>
+                                <td>{{proceso.total_pot_rt_termo_agri|floatformat:2}}</td>
+                                <td>{{proceso.masa_agricola_seca|floatformat:2}}</td>
+                            </tr>
+                            <tr>
+                                <td>Biomasa Residuos solidos urbanos RSU</td>
+                                <td>{{proceso.total_pot_rt_termo_rsu|floatformat:2}}</td>
+                                <td>{{proceso.total_masa_rsu|floatformat:2}}</td>
+                            </tr>
+                            <tr>
+                                <td>Total </td>
+                                <td>{{proceso.pot_teo_termo|floatformat:2}}</td>
+                                <td>{{proceso.biomasa_seca|floatformat:2}}</td>
+                                
+                            </tr>
+
+                        </table>
+
+                        <TABLE class="centrado">
+                            <tr>
+                                <td> <STRong>Total Potencial energético técnico [MW]</STRong></td>
+                                <td>{{proceso.pot_tec_termo|floatformat:2}}</td>
+                            
+                            </tr>
+                            <tr>
+                                <td> <STRong>Total Potencial energético técnico de planta [MW]</STRong></td>
+                                <td>{{proceso.pot_tec_termo_planta|floatformat:2}}</td>
+                            
+                            </tr>
+                        </TABLE>
+
+
+
+                    {% endif %}
+
+
+
+
+
+
+
+
+                    {% if proceso.caso == 'caso1' or proceso.caso == 'caso3' or proceso.caso == 'caso4' or proceso.caso == 'caso5' %}
+                        <p>
+                        En la siguiente tabla se encuentran los potenciales enérgeticos teóricos y Potencial técnico total obtenidos: 
+                        </p>
+                
+                            <table class="centrado">
+                                <tr>
+                                    <th colspan="3"> Potenciales por Ruta Bioquímica</th>
+                                </tr>
+                                <tr>
+                                    <th>TIPO RESIDUO</th>
+                                    <th>POTENCIAL ENERGÉTICO ECONÓMICO[MWh/AÑO]</th>
+                                    <th>MASA DE RESIDUOS [ton/año]</th>
+                                </tr>
+                                <tr>
+                                    <td>Biomasa residual agricola</td>
+                                    <td>{{proceso.total_pot_rt_bioq_agri|floatformat:2}}</td>
+                                    <td>{{proceso.masa_agricola_humeda|floatformat:2}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Biomasa residual pecuaria</td>
+                                    <td>{{proceso.total_pot_rt_bioq_pecu|floatformat:2}}</td>
+                                    <td>{{proceso.total_masa_pecuaria|floatformat:2}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Biomasa Residuos solidos urbanos organicos RSUO</td>
+                                    <td>{{proceso.total_pot_rt_bioq_rsuo|floatformat:2}}</td>
+                                    <td>{{proceso.total_masa_rsuo|floatformat:2}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td>{{proceso.pot_teo_bioq|floatformat:2}}</td>
+                                    <td>{{proceso.biomasa_humeda|floatformat:2}}</td>
+
+                                </tr>
+                            </table>
+                            
+
+                            <table class="centrado">              
+                                <tr>
+                                    <td><strong> Total Potencial energético técnico [MW]  </strong></td>
+                                    <td>{{proceso.pot_tec_bioq|floatformat:2}} MWh/año</td>
+                                    <td> <STRong>Total Potencial energético técnico de planta [MW]</STRong></td>
+                                    <td>{{proceso.pot_tec_bioq_planta|floatformat:2}}</td>
+                            
+                                </tr>
+                            </table>
+
+                
+                    {% endif %}
+
+
+                    {% if proceso.caso == 'caso1' or proceso.caso == 'caso2' or proceso.caso == 'caso3' or proceso.caso == 'caso4' or proceso.caso == 'caso5' or proceso.caso == 'caso6' %}            
+
+                        <p> Se presenta la estimación de costos CAPEX y OPEX para la ruta seleccionada: 
+                        </p>    
+                        <table class= "centrado">
+
+                            {% if proceso.tipo1 or proceso.tipo2 or proceso.tipo3 %}
+        
+
+
+                                <tr>
+                                    <th colspan="2">ESTIMACIÓN DE COSTOS</th>
+                                </tr>
+                            {% endif %}
+                            
+
+                            
+
+                        
+                            {% if proceso.tipo1 and proceso.rt_final == 'Termoquímica'%}
+                                <tr>
+                                    <th colspan="2">Costos asociados a Combustion OCR y CRC - RT Termoquímica</th>
+                                </tr>
+                                <tr>
+                                    <th>CAPEX - Costos de Inversión USD</th>
+                                    <td> {{ proceso.capex1|floatformat:2 }}</td>
+                                </tr>
+                                <tr>
+                                    <th>OPEX - Costos de Operación y mantenimiento [USD/AÑO]</th>
+                                    <td>{{ proceso.opex1|floatformat:2 }}</td>
+                                </tr>
+                          
+
+
+                            {% elif proceso.tipo2 and proceso.rt_final == 'Termoquímica'%}
+                            <tr>
+                                <th colspan="2">Costos asociados a Gasificación - RT Termoquímica</th>
+                            </tr>
+                                <tr>
+                                    <th>CAPEX - Costos de Inversión USD</th>
+                                    <td>$ {{ proceso.capex2|floatformat:2 }}</td>
+                                </tr>
+                                <tr>
+                                    <th>OPEX - Costos de Operación y mantenimiento [USD/AÑO]</th>
+                                    <td>$ {{ proceso.opex2|floatformat:2}}</td>
+                                </tr>
+                          
+
+                             
+
+    
+                            {% elif proceso.tipo3 and proceso.rt_final == 'Bioquímica'%}
+
+                                <tr>
+                                    <th colspan="2">Costos asociados a Digestión anaerobia - RT Bioquímica</th>
+                                </tr>
+                                <tr>
+                                    <th>CAPEX - Costos de Inversión USD</th>
+                                    <td>{{ proceso.capex3|floatformat:2 }}</td>
+                                </tr>
+                                <tr>
+                                    <th>OPEX - Costos de Operación y mantenimiento [USD/AÑO]</th>
+                                    <td> {{ proceso.opex3|floatformat:2 }}</td>
+                                </tr>
+                            
+
+
+
+                            {% elif proceso.rt_final == 'Hibrida' %}
+
+                            <tr>
+                                <th colspan="2">Costos asociados a Combustion OCR y CRC - RT Termoquímica</th>
+                            </tr>
+                            <tr>
+                                <th>CAPEX - Costos de Inversión USD</th>
+                                <td> {{ proceso.capex1|floatformat:2 }}</td>
+                            </tr>
+                            <tr>
+                                <th>OPEX - Costos de Operación y mantenimiento [USD/AÑO]</th>
+                                <td> {{ proceso.opex1|floatformat:2 }}</td>
+                            </tr>
+
+
+                            <tr>
+                                <th colspan="2">Costos asociados a Digestión anaerobia - RT Bioquímica</th>
+                            </tr>
+                            <tr>
+                                <th>CAPEX - Costos de Inversión USD</th>
+                                <td> {{ proceso.capex3|floatformat:2}}</td>
+                            </tr>
+                            <tr>
+                                <th>OPEX - Costos de Operación y mantenimiento [USD/AÑO]</th>
+                                <td> {{ proceso.opex3|floatformat:2 }}</td>
+                            </tr>
+                        {% endif %}
+
+                            
+
+                        </table>
+                    {% endif %}
+
+
+                    
+                    {% if proceso.tec_final or proceso.tec_final1 or proceso.tec_final2 == 'Combustión - Ciclo Rankine Convencional accionado con turbina axial / Gasificación' %} 
+                    
+                        <p>
+                            <strong>  Tecnologías por procesos Termoquímicos: </strong>Por medio de las tecnologias de gasificacion se puede producir Syngas o gas de sintesis,este se emplea para alimentar motores de combustión interna, turbinas de gas o plantas de ciclo combinado. Estos dispositivos convierten la energía química del gas en energía mecánica, que luego se convierte en electricidad a través de un generador. Otra tecnologia ampliamente empleada es la combustion directa de la biomasa, allí  la materia orgánica contenida en los residuos se quema directamente en presencia de oxígeno para generar calor esto se puede lograr por medio de diferentes ciclos termodinamicos (Ciclo Rankine Organico, Ciclo Rankine convencional, entre otros). El calor liberado se utiliza para calentar agua y producir vapor. El vapor a alta presión se dirige hacia una turbina de vapor que, al girar, acciona un generador que convierte la energía mecánica en electricidad. 
+
+                        </p>
+
+                    {% endif %}
+
+
+                    {% if proceso.tec_final or proceso.tec_final1 or proceso.tec_final2 == 'Combustión - Ciclo Rankine Convencional accionado con turbina axial' %} 
+                    
+                        <p>
+                        <strong>Combustión empleando Ciclo rankine convencional: </strong> La biomasa residual se quema para calentar agua y generar vapor en el ciclo Rankine convencional. El vapor de alta presión impulsa una turbina conectada a un generador que produce electricidad.
+                        Los procesos que se comprenden mediante esta tecnologia son los siguientes: 
+                            <ul>
+                                <li><strong>Combustión de Biomasa:</strong>
+                                Biomasa residual se quema en una caldera, liberando calor al quemar madera, desechos agrícolas u otros materiales orgánicos.
+                                </li>
+                                <li><strong>Generación de Vapor:</strong>
+                                El calor generado durante la combustión calienta el agua, convirtiéndola en vapor a alta presión con una gran cantidad de energía térmica.
+                                </li>
+                                <li><strong>Turbina de Vapor:</strong>
+                                El vapor de alta presión se dirige a una turbina con palas impulsadas por su expansión, convirtiendo la energía cinética del vapor en energía mecánica.
+                                </li>
+                                <li><strong>Generador:</strong>
+                                La turbina conectada a un generador convierte la energía mecánica en electricidad a través de la inducción electromagnética al hacer girar conductores.
+                                </li>
+                                <li><strong>Condensador y Recirculación:</strong>
+                                Después de la turbina, el vapor se enfría en un condensador, volviendo a su estado líquido. Luego, el agua se recircula para ser calentada nuevamente en la caldera.
+                                </li>
+                                <li><strong>Enfriamiento del Agua Condensada:</strong>
+                                El agua condensada se enfría antes de regresar a la caldera, a través de un intercambiador de calor que utiliza agua de enfriamiento, como un río o sistema cerrado.
+                                </li>
+                            </ul>
+        
+                        </p>
+
+                    {% endif %}
+
+
+                    {% if proceso.tec_final or proceso.tec_final1 or proceso.tec_final2 == 'Combustión - Ciclo Rankine Orgánico accionado con turbina axial' %} 
+                    
+                        <p>
+                            <strong>Combustión empleando Ciclo rankine orgánico: </strong> Es un proceso que involucra la transformación de la energía contenida en la biomasa en electricidad utilizando un ciclo termodinámico de tipo Rankine, pero con un fluido orgánico como medio de trabajo en lugar de agua, lo que permite que el cambio de fase líquido a vapor o punto de ebullición tenga lugar a temperaturas más bajas. Esto permite aprovechar la energía contenida en la biomasa para generar electricidad. 
+
+                            Los procesos que se comprenden mediante esta tecnologia son los siguientes:
+                            <ul>
+                                <li>
+                                    <strong>Combustión de biomasa:</strong> La biomasa, que puede ser residuos agrícolas, forestales, agroalimentarios o residuos urbanos, se quema en una caldera para generar calor. Durante este proceso, se libera energía térmica a partir de la biomasa.
+                                </li>
+                                <li>
+                                    <strong>Generación de vapor:</strong> El calor generado por la combustión se utiliza para calentar el fluido orgánico y generar vapor. Este vapor se utiliza para impulsar una turbina.
+                                </li>
+                                <li>
+                                    <strong>Turbina y generador:</strong> El vapor de alta presión generado en la etapa anterior se dirige hacia una turbina, la cual se encarga de convertir la energía térmica en energía mecánica. Esta energía mecánica se utiliza para generar electricidad a través de un generador.
+                                </li>
+                                <li>
+                                    <strong>Condensación:</strong> Después de pasar por la turbina, el vapor se enfría y se condensa en un condensador, liberando calor.
+                                </li>
+                                <li>
+                                    <strong>Recirculación del fluido orgánico:</strong> El fluido orgánico condensado se recircula y se devuelve a la caldera para ser calentado nuevamente y convertido en vapor.
+                                </li>
+                            </ul>
+
+                        </p>
+
+                    {% endif %}
+
+                    
+                
+
+                    {% if proceso.tec_final or proceso.tec_final1 or proceso.tec_final2 == 'Digestión anaerobia - generación de biogas - impulsor MCI' %} 
+                    
+                        <p>
+                        <strong>Tecnologías para procesos bioquímicos:</strong> La ruta bioquímica para la generación de electricidad a partir de biomasa residual implica la descomposición biológica de la biomasa en un proceso conocido como digestión anaeróbica o fermentación. Es una forma sostenible de generar electricidad a partir de biomasa residual, ya que no solo produce energía, sino que también reduce la cantidad de desechos y emisiones. La tecnología mas aplicamente usada para generación de electricidad  a partir del biogas geenrado por medio de digestión  generado es el empleo de motores de combustion interna. 
+                        Los procesos que se comprenden con esta tecnología son los siguientes: 
+                        </p>
+
+                        <ul>
+                                <li><strong>Digestión Anaeróbica:</strong> La biomasa residual se descompone biológicamente sin oxígeno mediante microorganismos, formando componentes más simples como ácidos orgánicos y gases.</li>
+                                
+                                <li><strong>Producción de Biogás:</strong> La digestión produce biogás, mezcla de metano (CH4) y dióxido de carbono (CO2), siendo el metano un combustible útil.</li>
+                                
+                                <li><strong>Captura y Almacenamiento de Biogás:</strong> El biogás se captura y almacena, generalmente en tanques cerrados para evitar la liberación de metano, un potente gas de efecto invernadero.</li>
+                                
+                                <li><strong>Generación de Electricidad:</strong> El biogás se quema en un cogenerador con motor o turbina de gas. La combustión genera calor, que crea vapor. El vapor impulsa una turbina de vapor conectada a un generador que produce electricidad.</li>
+                                
+                                <li><strong>Aprovechamiento de Calor Residual:</strong> El calor sobrante del proceso se utiliza para calentar instalaciones cercanas, como invernaderos, industrias o calefacción.</li>
+                                
+                                <li><strong>Gestión de Subproductos:</strong> Tras la digestión, se obtiene un residuo llamado digestato, rico en nutrientes, útil como fertilizante en la agricultura.</li>
+                        </ul>
+                        
+                    {% endif %}
 
             
+                
 
+        {% endif %}
+        <a href="{% url 'inicio' %}"><button class="button">Iniciar otro proceso</button></a> 
 
-            {% if proceso.rt_final == 'Termoquimica' %}
-            <table>
-                <tr>
-                    <th>TIPO RESIDUO</th>
-                    <th>POTENCIAL ENERGÉTICO [MWh/AÑO]</th>
-                    <th>MASA DE RESIDUOS [ton/AÑO]</th>
-                </tr>
-                <tr>
-                    <td>Biomasa residual agricola</td>
-                    <td>{{proceso.total_pot_rt_termo_agri|floatformat:2}}</td>
-                    <td>{{proceso.masa_agricola_seca|floatformat:2}}</td>
-                </tr>
-                <tr>
-                    <td>Biomasa Residuos solidos urbanos RSU</td>
-                    <td>{{proceso.total_pot_rt_termo_rsu|floatformat:2}}</td>
-                    <td>{{proceso.total_masa_rsu|floatformat:2}}</td>
-                </tr>
-                <tr>
-                    <td>Total Potencial energético </td>
-                    <td>{{proceso.pot_teo_termo|floatformat:2}}</td>
-                    <td>{{proceso.biomasa_seca|floatformat:2}}</td>
-                </tr>
-                <tr>
-                    <td>Total Potencial energético técnico</td>
-                    <td>{{proceso.pot_tec_termo|floatformat:2}}</td>
-                    <td></td>
-                </tr>
-
-            </table>
-
-            <TABLE>
-                <tr>
-                    <th colspan="2">DEMANDA Y COBERTURA ENERGÉTICA DEL USUARIO CON RUTA SELECCIONADA </th>
-                </tr>
-                <tr>
-                    <td>Demanda energética del usuario</td>
-                    <td>{{proceso.ed}}</td>
-
-                </tr>
-                <tr>
-                    <td>Demanda proyectada a 20 años</td>
-                    <td>{{proceso.edf}} </td>
-
-                </tr>
-                <tr>
-                    <td> Cubrimiento energético</td>
-                    <td>{{proceso.cub_rt_termo}} %</td>
-
-                </tr>
-            </TABLE>
-            {% else %}
-            <table>
-                <tr>
-                    <th>TIPO RESIDUO</th>
-                    <th>POTENCIAL ENERGÉTICO [MWh/AÑO]</th>
-                    <th>MASA DE RESIDUOS [ton/AÑO]</th>
-                </tr>
-                <tr>
-                    <td>Biomasa residual agricola</td>
-                    <td>{{proceso.total_pot_rt_bioq_agri|floatformat:2}}</td>
-                    <td>{{proceso.masa_agricola_humeda|floatformat:2}}</td>
-                </tr>
-                <tr>
-                    <td>Biomasa residual pecuaria</td>
-                    <td>{{proceso.total_pot_rt_bioq_pecu|floatformat:2}}</td>
-                    <td>{{proceso.total_masa_pecuaria|floatformat:2}}</td>
-                </tr>
-                <tr>
-                    <td>Biomasa Residuos solidos urbanos organicos RSUO</td>
-                    <td>{{proceso.total_pot_rt_bioq_rsuo|floatformat:2}}</td>
-                    <td>{{proceso.total_masa_rsuo|floatformat:2}}</td>
-                </tr>
-                <tr>
-                    <td>Total Potencial energético economico</td>
-                    <td>{{proceso.pot_teo_bioq|floatformat:2}}</td>
-                    <td>{{proceso.biomasa_seca|floatformat:2}}</td>
-                </tr>
-                <tr>
-                    <td>Total Potencial técnico</td>
-                    <td>{{proceso.pot_tec_bioq|floatformat:2}}</td>
-                    <td></td>
-                </tr>
-
-            </table>
-
-            <TABLE>
-                <tr>
-                    <th colspan="2">DEMANDA Y COBERTURA ENERGÉTICA DEL USUARIO CON RUTA SELECCIONADA </th>
-                </tr>
-                <tr>
-                    <td>Demanda energética del usuario</td>
-                    <td>{{proceso.ed}}</td>
-
-                </tr>
-                <tr>
-                    <td>Demanda proyectada a 20 años</td>
-                    <td>{{proceso.edf}} </td>
-
-                </tr>
-                <tr>
-                    <td>Cubrimiento energético</td>
-                    <td>{{proceso.cub_rt_bioq}} %</td>
-
-                </tr>
-            </TABLE>
-
-
-
-            
-            {% endif %}
-
-            <table>
-                {% if proceso.tipo1 or proceso.tipo2 or proceso.tipo3%}
-                <tr>
-                    <th colspan="2">ESTIMACIÓN DE COSTOS</th>
-                </tr>
-                {% endif %}
-                {% if proceso.tipo1 %}
-                <tr>
-                    <th>Capex - Inversión [COP/AÑO]</th>
-                    <td>$ {{ proceso.capex1|floatformat:0 }}</td>
-                </tr>
-                <tr>
-                    <th>Opex - Operación y mantenimiento [COP/AÑO]</th>
-                    <td>$ {{ proceso.opex1|floatformat:0 }}</td>
-                </tr>
-                {% endif %}
-                {% if proceso.tipo2 %}
-                <tr>
-                    <th>Capex - Inversión [COP/AÑO]</th>
-                    <td>$ {{ proceso.capex2|floatformat:0 }}</td>
-                </tr>
-                <tr>
-                    <th>Opex - Operación y mantenimiento [COP/AÑO]</th>
-                    <td>$ {{ proceso.opex2|floatformat:0 }}</td>
-                </tr>
-                {% endif %}
-                {% if proceso.tipo3 %}
-                <tr>
-                    <th>Capex - Inversión [COP/AÑO]</th>
-                    <td>$ {{ proceso.capex3|floatformat:0 }}</td>
-                </tr>
-                <tr>
-                    <th>Opex - Operación y mantenimiento [COP/AÑO]</th>
-                    <td>$ {{ proceso.opex3|floatformat:0 }}</td>
-                </tr>
-                {% endif %}
-            </table>
-
-            <a href="{% url 'inicio' %}"><button class="button">Iniciar otro proceso</button></a>
+      
 
         </div>
+       
+
     </div>
+
+
+   
 </body>
 
 </html>

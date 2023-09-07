@@ -15,45 +15,54 @@
                     <h1>Viabilidad</h1>
                     <div class= "description">
                         <p>
-                          Para realizar un análisis del uso energético de la biomasa, es crucial considerar la región y la
-                            distancia involucrada. La región se refiere al lugar geográfico en el cual se llevaría a cabo el
-                            proyecto de biomasa, como la Región Amazónica, Pacífica u Orinoquía. Por otro lado, distancia se
-                            refiere a la proximidad o accesibilidad de la biomasa (ReMax : radio máximo de recolecta). Si desea profundizar en este tema, le invitamos a consultar la investigación correspondiente. <br>
-                            Se han estimado distancias máximas permitidas para cada región :
+                          Para realizar un análisis del uso energético de la biomasa, es crucial considerar la región de Colombia y la
+                          distancia de recolecta de la biomasa. La región se refiere al lugar geográfico en el cual se llevaría a cabo el
+                         proyecto de biomasa. En este programa se evalúan las ZNI de Colombia que son la Región Amazónica, Pacífica y Orinoquía. <br>
+                         La distancia se refiere a la proximidad o accesibilidad de la biomasa al centro de generación distribuida (CGD) que se proyecta construir (Re.e : radio económico de recolecta). Este determina a que distancia máxima se recomienda recolectar biomasa residual en la región de modo que sea viable económicamente. De igual forma se recomienda que la distancia entre el CGD y el centro de consumo (Re.e=Radio económico para distribución eléctrica) no supere 20 km, esto dadas las condiciones de distribución de electricidad que acarrea perdidas de transmisión de energía. 
+                        <br>
+                        En la imagen se muestra las distancias descritas anteriormente: 
+                            
                         </p>
+
+                        <center>
+                          <img src="{% static 'img/radio.png' %}" alt="radio" width="300px" >
+                      </center>
+                        <p>En la siguiente tabla se muestran las distancias máximas (Re.e) permitidas para cada región :</p>
                         <div class="centrado">
                             <table>
-                              <caption>Radio máximo de recolecta de las ZNI de Colombia</caption>
+                              <caption>Radio económico de recolecta de las ZNI de Colombia</caption>
                                 <tr>
                                   <th>Región</th>
-                                  <th>ReMax [km]</th>
+                                  <th>Re.e[km]</th>
                                 </tr>
                                 <tr>
                                   <td>Amazónica</td>
-                                  <td>27,84</td>
+                                  <td>7.84</td>
                                 </tr>
                                 <tr>
                                   <td>Orinoquía</td>
-                                  <td>30,49</td>
+                                  <td>10.49</td>
                                 </tr>
                                 <tr>
                                     <td>Pacífica </td>
-                                    <td>21,28</td>
+                                    <td>6</td>
                                   </tr>
                               </table>
                           </div>
+
+                        
+
                           <p>
-                            Para evaluar este primer parámetro, seleccione la región geográfica en la cual
-                            planea instalar el centro de generación distribuida e ingrese la distancia entre el punto donde se encuentra la biomasa residual y el lugar donde se proyecta instalar el centro de generación
-                            distribuida. Si no cuenta con esta información, ingrese una distancia aproximada. 
+                            Para evaluar este parámetro, seleccione la región geográfica en la cual
+                            se pretende implementar el CGD e ingrese la distancia entre el punto donde se encuentra la biomasa residual y el lugar donde se proyecta instalar el CDG. Tenga en cuenta la tabla anterior. Si no cuenta con esta información, ingrese una distancia estimada. 
                           </p>
                 
                     </div>
                     <form action="{% url 'viabilidad' proceso.id %}" method="post">
                         {% csrf_token %}
                         <div class= "inputs">
-                            <strong>Seleccione región de Colombia: </strong>{{form.region}}
-                            <strong>Ingrese distancia en kilometros (km): </strong>{{form.distancia}}
+                            <strong>Seleccione la región de Colombia: </strong>{{form.region}}
+                            <strong>Ingrese la distancia (separador con punto) en kilometros (km) que existe desde la biomasa residual hasta la CGD: </strong>{{form.distancia}}
                         </div>
                         <button type="submit" class="button">Continuar</button>
                     </form>
@@ -62,25 +71,25 @@
                     <div class= "results">
                         <h1>Resultados Viabilidad por radio de Recolecta </h1>
                         <div class="centrado">
-                        <table>
-                            <tr>
-                              <th>Región</th>
-                              <th>ReMax [km]</th>
-                            </tr>
-                            <tr>
-                              <td>Amazónica</td>
-                              <td>27,84</td>
-                            </tr>
-                            <tr>
-                              <td>Orinoquía</td>
-                              <td>30,49</td>
-                            </tr>
-                            <tr>
-                                <td>Pacífica </td>
-                                <td>21,28</td>
+                          <table>
+                            <caption>Radio máximo de recolecta de las ZNI de Colombia</caption>
+                              <tr>
+                                <th>Región</th>
+                                <th>Radio economico de recolecta [km]</th>
                               </tr>
-                              <caption>Radio máximo de recolecta de las ZNI de Colombia</caption>
-                          </table>
+                              <tr>
+                                <td>Amazónica</td>
+                                <td>7.84</td>
+                              </tr>
+                              <tr>
+                                <td>Orinoquía</td>
+                                <td>10.49</td>
+                              </tr>
+                              <tr>
+                                  <td>Pacífica </td>
+                                  <td>6</td>
+                                </tr>
+                            </table>
                         </div>
 
                         <p>La distancia ingresada de {{proceso.distancia}} km en la región {{proceso.get_region_display}} se considera <span class="{% if proceso.resultado == 'viable' %}viable{% endif %}">{{proceso.get_resultado_display}}</span> 

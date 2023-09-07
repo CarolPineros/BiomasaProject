@@ -17,23 +17,25 @@
             
             <h1>Módulo Biomasa residual Agrícola</h1>
 
-            <p> En módulo Agrícola se determinará la masa de residuo generado y el Potencial energético de la
+            <p> En módulo Agrícola se determina la masa de residuo disponible y el Potencial energético de la
                 biomasa residual agrícola. <br>
                 La Biomasa residual agrícola (BRA) es toda aquella conformada por los residuos o subproductos de la
                 actividad agrícola en algún cultivo específico, que puede ser permanente o transitorio.
                 Estos cultivos corresponden a los más representativos de Colombia [Arboleda y otros, 2020]. La
                 biomasa residual agrícola puede ser empleada para generar energía dado su contenido de materia
                 orgánica. Cuando esta biomasa se somete a procesos de combustión o a procesos de descomposición
-                controlada, libera calor en forma de energía térmica. Este calor puede ser utilizado para generar
+                controlada, libera calor (o biogás por procesos bioquímicos) esto en forma de energía térmica. Este calor puede ser utilizado para generar
                 vapor e impulsar turbinas, produciendo electricidad. <br>
-                Para esto se requiere ingresar características de la biomasa residual que se encuentra disponible
-                para emplear en el proyecto de bioenergía, se le solicitará cultivo, tipo de residuo,
+                Para evaluar su potencial energético se requiere ingresar características de la biomasa residual que se encuentra disponible
+                para emplear en el proyecto de bioenergía, se le solicita cultivo, tipo de residuo,
                 hectáreas sembradas al año, y el departamento donde se ubica. Tenga en cuenta que la
-                biomasa debe estar dentro de la distancia (radio de recolecta) anteriormente ingresado.
+                biomasa debe estar dentro de la distancia (radio de recolecta) anteriormente ingresado. Por ello se da una valor de hectareas máximas permitidas por región. 
                 <br>
                 Los cultivos disponibles para evaluación son: palma de aceite, caña de azúcar, caña para
                 panela, café, maíz, arroz, banano, plátano, algodón, coco, frijol, maní, soya, trigo,
                 yuca. Estos cultivos corresponden a los más representativos de Colombia.
+
+                
             </p>
 
             <form action="{% url 'agricola_pregunta' proceso.id %}" method="post">
@@ -58,7 +60,12 @@
                     biomasa debe estar dentro de la distancia (radio de recolecta) anteriormente evaluado.
                     Los cultivos disponibles para evaluación son: palma de aceite, caña de azúcar, caña para
                     panela, café, maíz, arroz, banano, plátano, algodón, coco, frijol, maní, soya, trigo,
-                    yuca.
+                    yuca.  <br>
+                   
+                    Tenga en cuenta las hectareas máximas a ingresar para cada región de Colombia. 
+                    <li>Amazonía 19.310 ha </li>
+                    <li> Orinoquía: 34.570 ha </li>
+                    <li> Pacífica: 11.310 ha </li>
                 </p>
 
             </div>
@@ -88,7 +95,7 @@
                     </form>
                 </div>
                 <div class="right-biomasa">
-                    <h1>Resultados</h1>
+                    <h1>Resultados Biomasa residual Agrícola</h1>
                     <p>En la siguente tabla se muestran los resultados de la biomasa agrícola ingresada y potencial
                         energético:</p>
                     <table>
@@ -100,7 +107,7 @@
                                 <th>Región</th>
                                 <th>Departamento</th>
                                 <th>Hectareas</th>
-                                <th>Masa Agrícola</th>
+                                <th>Masa Agrícola [ton/año]</th>
                                 <th>Potencial energético Termoquímico [MWh/año]</th>
                                 <th>Potencial energético Bioquímico [MWh/año]</th>
                             </tr>
@@ -130,10 +137,12 @@
                             </tr>
                         </tfoot>
                     </table>
-                    {% if proceso.total_hectareas > 0 %}
-                    <a href="{% url 'pecuaria' proceso.id %}"><button class="button">Guardar y
+                    
+                    <p> Cuando finalice de ingresar los datos Click para pasar al siguiente módulo. 
+                    </p>
+                    <a href="{% url 'pecuaria' proceso.id %}"><button class="button">Finalizar y
                             continuar</button></a>
-                    {% endif %}
+                    
                 </div>
             </div>
             {% endif %}

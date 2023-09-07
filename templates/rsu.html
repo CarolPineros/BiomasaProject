@@ -25,45 +25,22 @@
                             domiciliarios,
                             de limpieza urbana, de establecimientos comerciales y prestadores de servicios, de servicios
                             públicos, de saneamiento básico, de industrias, de servicios de salud, de construcción civil,
-                            de servicios de transporte y de minería. (Superservicios & DNP, 2018). El dato de generación
-                            promedio de resiudos por habitante en Colombia es de 0,68 kg/día. Algunos datos de referencia se
-                            presentan a continuación.
-
-                        <div class="centrado">
-
-                            <table>
-                                <tr>
-                                    <th> Región</th>
-                                    <th>RSU (kg/dia)</th>
-                                </tr>
-                                <tr>
-                                    <td>Amazonía </td>
-                                    <td>0,57</td>
-
-                                <tr>
-                                    <td>Andina </td>
-                                    <td>0,67</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Caribe </td>
-                                    <td>0,73</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Orinoquía </td>
-                                    <td>0,67</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Pacifica </td>
-                                    <td>0,66</td>
-                                </tr>
-                                </tr>
-                            </table>
-                        </div>
+                            de servicios de transporte y de minería. (Superservicios & DNP, 2018). Se recomienda ingresar los residuos en lo posible secos sin posibilidad de reciclar (no ingresar residuos de comida, rsiduos de jardin con altas humedades) la composición recomendada puede contener: 
+                            <li>Papel</li>
+                            <li>Cartón</li> 
+                            <li>Textiles</li>
+                            <li>Caucho</li>
+                            <li>Cuero</li>
+                            <li>Plástico</li>
+                            <li>Residuos de madera</li>
+                       
+                            <br>
+  
+                      
+                        <h3>RESTRICCIONES</h3>
+                       
                         <p>
-                        Es fundamental tener en cuenta las restricciones que existen al utilizar RSUO en la generación de
+                        Es fundamental tener en cuenta las restricciones que existen al utilizar RSU en la generación de
                         energía:
                         <li>
                             Distancia máxima entre CGD y fuente de biomasa: La falta de separación en los Residuos
@@ -80,6 +57,8 @@
 
                         </li>
                         </p>
+
+                        
                         <strong> 
                             Evalue si la biomasa residual soporta la restricción anteriormente expuesta y responda:
                             <br>
@@ -93,28 +72,37 @@
                 {% else %}
                 <div class="container-biomasa">
                     {% if proceso.total_masa_rsu <= 0 %}
-                    <div class="left-biomasa">
+                    <div class= >
                          <h1>Módulo Residuos Sólidos Urbanos (RSU)</h1>
                             En módulo RSU se determinará la masa de residuo generado y el Potencial energético de los RSU ,
-                            a partir de los datos ingresados. Se dan 2 opciones para su cálculo:
+                            a partir de los datos ingresados. Se recomienda ingresar los residuos en lo posible secos sin posibilidad de reciclar (no se recomienda ingresar residuos con altas humedades) la composición recomendada es: 
+                            <li>Papel</li>
+                            <li>Cartón</li> 
+                            <li>Textiles</li>
+                            <li>Caucho</li>
+                            <li>Cuero</li>
+                            <li>Plástico</li>
+                            <li>Residuos de madera</li>
+
+                            <br> Se dan 2 opciones para su registro:
                             <ol>
-                                <li>Ingresando cantidad de residuos generados [ton/año] ó </li>
-                                <li>Ingresando cantidad de habitantes y seleccionando región donde se ubica. </li>
+                                <li>Ingrese la cantidad de residuos generados en [ton/año] ó </li>
+                                <li>Ingrese cantidad de habitantes y seleccionando región donde se ubica. </li>
                             </ol>
 
                             <div class="inputs">
-                                <strong>¿ Conoce la cantidad de RSU generados al año para el proyecto de energía? </strong>
-                                Indique "No" para hacer una estimación de la cantidad de residuo.
+                                <strong>¿Conoce la cantidad de RSU generados al año para el proyecto de energía? </strong>
+                                
                             </div>
 
-                            <button id="btnSi" class="button">Sí</button>
-                            <button id="btnNo" class="button">No</button>
+                            <button id="btnSi" class="button">INGRESE CANTIDAD DE RESIDUOS</button>
+                            <button id="btnNo" class="button">INGRESE CANTIDAD HABITANTES Y REGIÓN</button>
 
                             <div id="divNo" class="oculto">
                                 <form action="{% url 'rsu' proceso.id %}" method="post">
                                     {% csrf_token %}
                                     <div class="inputs">
-                                        <strong>Ingrese cantidad de habitantes: </strong> {{form1.cant_personas}}
+                                        <strong>Ingrese cantidad de habitantes del centro de consumo: </strong> {{form1.cant_personas}}
                                         <strong>Seleccione región de Colombia: </strong> {{form1.region}}
                                     </div>
                                     <button type="submit" class="button">Añadir Biomasa</button>
@@ -132,19 +120,22 @@
                             </div>
                     </div>
                     {% else %}
-                    <div class="right-agricola">
+                    <div class=>
                         <h1>Resultados Residuos Sólidos Urbanos (RSU)</h1>
                         <p>En la siguente tabla se muestran los resultados de masa de residuo y potencial energético
                             calculado:</p>
                         <table>
                             <thead>
+
                                 <tr>
-                                    <th>Nº</th>
-
-                                    <th>Cantidad de habitantes</th>
-
-                                    <th>Masa RSU [ton/año]</th>
-                                    <th>Potencial energético Termoquímico [MWh/año]</th>
+                                    {% for biomasa in proceso.biomasa_rsu.all %}
+                                        <th>Nº</th>
+                                        {% if biomasa.cant_personas is not None %}
+                                        <th>Cantidad de personas</th>
+                                        {% endif %}
+                                        <th>Masa RSU [ton/año]</th>
+                                        <th>Potencial energético Termoquímico [MWh/año]</th>
+                                        {% endfor %}
                                 </tr>
                             </thead>
                             <tbody>
@@ -160,7 +151,9 @@
                                 {% endfor %}
                             </tbody>
                         </table>
-                        <a href="{% url 'rsuo' proceso.id %}"><button class="button">Guardar y continuar</button></a>
+
+                        
+                        <a href="{% url 'rsuo' proceso.id %}"><button class="button">Continuar</button></a>
                     </div>
                     {% endif %}
                 </div>

@@ -18,7 +18,7 @@
             <form action="{% url 'pecuaria_pregunta' proceso.id %}" method="post">
                 {% csrf_token %}
                 <div class="inputs">
-                    En módulo Pecuaria se determinará la masa de residuo generado y el Potencial energético de la
+                <p> En módulo Pecuaria se determina la masa de residuo generado y el Potencial energético de la
                     biomasa residual pecuaria, a partir de los datos ingresados Animal de cultivo, tipo y cantidad. <br>
                     La biomasa considerada es toda aquella conformada por los subproductos (estiercol generado) de la
                     actividad pecuaria.[Arboleda y otros, 2020]
@@ -29,6 +29,8 @@
                     <br>
                     Es fundamental tener en cuenta las restricciones que existen al utilizar residuos pecuarios en
                     la generación de energía:
+                </p>
+                <h3>RESTRICCIONES</h3>
                     <ol>
                         <li>
                             Distancia máxima entre CGD y fuente de biomasa: Se recomienda que la distancia entre el
@@ -92,7 +94,7 @@
                 </div>
 
                 <div class="right-biomasa">
-                    <h1>Resultados</h1>
+                    <h1>Resultados Biomasa residual Pecuaria</h1>
                     <p>En la siguente tabla se muestran la masa de residuo y potencial energético de la biomasa
                         pecuaria añadida: </p>
                     <table>
@@ -127,9 +129,11 @@
                             </tr>
                         </tfoot>
                     </table>
-                    {% if proceso.total_cantidad > 0 %}
-                    <a href="{% url 'rsu' proceso.id %}"><button class="button">Guardar y continuar</button></a>
-                    {% endif %}
+
+                    <p> Cuando finalice de ingresar los datos Click para pasar al siguiente módulo.  
+                    </p>
+                    <a href="{% url 'rsu' proceso.id %}"><button class="button">Finalizar y continuar</button></a>
+                  
                 </div>
             </div>
             {% endif %}

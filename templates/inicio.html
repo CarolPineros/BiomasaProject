@@ -13,14 +13,14 @@
   <div class="container">
     {% include 'includes/items.html' %}
     <div class="right">
-      <h1>Pasos para el desarrollo del programa</h1>
-      <p> Este programa se desarrolla de forma secuencial, por esto se describen los pasos que se realizaran para la
+      <h1>Descripción del programa</h1>
+      <p> Este programa es una herramienta pensada en el apoyo al diseño de centros de generación Distribuida en las ZNI de Colombia, a partir de los recursos disponibles como es Biomasa residual. Esto incluye residuos de tipo agrícola, pecuario, residuos sólidos urbanos inorgánicos (Considerados secos) y orgánicos (húmedos). De acuerdo con los datos ingresados de la biomasa residual disponible y demanda energética del centro de consumo se da un resultado del cubrimiento energético posible a obtener, las tecnologías a emplear, potencia y cantidad de plantas obtenidas con los recursos disponibles.  <br>
+        Este programa se desarrolla de forma secuencial, por esto se describen los pasos que se realizan para la
         obtención de resultados: </p>
       <ol>
         <li>Ingresa la distancia de la biomasa residual al punto donde esta proyectada la central de generación
           distribuida</li>
-        <li>Ingresa la biomasa disponible dentro de la distancia indicada, para determinar potencial energético
-          economico </li>
+        <li>Ingresa características solicitadas del tipo de biomasa disponible dentro de la distancia indicada en el paso anterior, para determinar potencial energético de cada una.</li>
         <ul>
           <li>Biomasa residual Agricola</li>
           <li>Biomasa residual Pecuaria</li>
@@ -29,11 +29,12 @@
         </ul>
         </li>
         <li>Ingresa demanda energética del centro de consumo al que se proyecta abastecer de energía. </li>
-        <li>Evalúa resultados: Ruta tecnológica, tecnología y cantidad de plantas recomendadas y estimación de costos.
+        <li>Evalúa resultados: Se muestran Posible cubrimiento de la demanda energética con la Ruta tecnológica recomendada, tecnología a emplear, capacidad y cantidad de las plantas recomendadas. 
+          Adicionalmente los resultados de estimación de costos si resulto viable el proyecto.
         </li>
       </ol>
-
-      <a href="{% url 'iniciar_proceso' %}"><button class="button">Iniciar Proceso</button></a>
+      <p>Click aquí para empezar</p>
+      <a href="{% url 'iniciar_proceso' %}"><button class="button">EMPEZAR PROCESO</button></a>
 
     </div>
   </div>
