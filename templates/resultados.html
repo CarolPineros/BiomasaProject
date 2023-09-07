@@ -21,14 +21,14 @@
 
 
         {% else %}
+
             <h1>RESÚMEN DE RESULTADOS</h1>
                 <p> A continuación se muestran los resultados obtenidos: 
                 </p>
 
 
 
-                 
-
+                {% if proceso.caso == 'caso0' or proceso.caso == 'caso7' %}
                         <table class="centrado">
                             <tr>
                                 <th>Observación</th>
@@ -40,7 +40,35 @@
                                 <th>Caso</th>
                                 <td>{{ proceso.caso }}</td>
                             </tr>
+                            <tr>
+                                <th>Potencial técnico por ruta bioquímica de planta [MW]</th>
+                                <td>{{ proceso.pot_tec_bioq_planta }}</td>
+                            </tr>
+                            <tr>
+                                <th>Potencial técnico por ruta termoquímica de planta [MW]</th>
+                                <td>{{ proceso.pot_tec_termo_planta }}</td>
+                            </tr>
                         </table>
+                         
+
+                        {% endif %}
+
+                        {% if proceso.caso != 'caso0' and proceso.caso != 'caso7' %}
+                            <table class="centrado">
+                                <tr>
+                                    <th>Observación</th>
+
+                                    
+                                    <td>{{ proceso.comentario }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Caso</th>
+                                    <td>{{ proceso.caso }}</td>
+                                </tr>
+                            </table>
+
+                        {% endif %}
+                        
                          
               
 
@@ -163,26 +191,7 @@
                     
                 
                     
-                    {% if proceso.caso == 'caso2' or proceso.caso == 'caso4' or proceso.caso == 'caso6' %}
-
-                        
-                
-                        <p>La ruta Termoquímica comprende procesos que aprovechan la energía termica de la biomasa residual. Los procesos termoquímicos para la generación de electricidad a partir de biomasa residual involucran la conversión de la materia orgánica contenida en los residuos en formas de energía aprovechables. Estos procesos pueden incluir la gasificación y la combustión.
-
-                        </p>
-                    {% endif %}
-
                     
-                    {% if proceso.caso == 'caso1' or proceso.caso == 'caso3' or proceso.caso == 'caso4' or proceso.caso == 'caso5' %}
-
-                                      
-                        <p> La ruta bioquímica para la generación de electricidad a partir de biomasa residual implica la descomposición biológica de la biomasa en un proceso conocido como digestión anaeróbica o fermentación. Se refiere al proceso de transformar biomasa residual, como restos de plantas y desechos orgánicos, en electricidad utilizando reacciones biológicas.  Al generar electricidad a partir de biomasa, se evita que los materiales orgánicos se acumulen como desechos, reduciendo la contaminación y la necesidad de vertederos. 
-                        Es una forma sostenible de generar electricidad a partir el biogas generado, ya que no solo produce energía, sino que también reduce la cantidad de desechos y emisiones gases de efecto invernadero. 
-
-                        </p>
-
-                    {% endif %}
-
 
 
 
@@ -190,12 +199,12 @@
 
                     {% if proceso.caso == 'caso2' or proceso.caso == 'caso4' or proceso.caso == 'caso6' %}
                         <p>
-                        En la siguiente tabla se encuentran los potenciales enérgeticos teóricos y Potencial técnico total obtenidos: 
+                        En la siguiente tabla se encuentran los potenciales enérgeticos teóricos y Potencial técnico total obtenidos en la Ruta Termoquímica: 
                         </p>
 
                         <table class="centrado">
                             <tr>
-                                <th colspan="3"> Potenciales por Ruta termoquímica</th>
+                                <th colspan="3"> Potenciales por ruta termoquímica</th>
                             </tr>
 
 
@@ -249,7 +258,7 @@
 
                     {% if proceso.caso == 'caso1' or proceso.caso == 'caso3' or proceso.caso == 'caso4' or proceso.caso == 'caso5' %}
                         <p>
-                        En la siguiente tabla se encuentran los potenciales enérgeticos teóricos y Potencial técnico total obtenidos: 
+                        En la siguiente tabla se encuentran los potenciales enérgeticos teóricos y Potencial técnico total obtenidos en la ruta Bioquímica: 
                         </p>
                 
                             <table class="centrado">
@@ -401,22 +410,42 @@
                     {% endif %}
 
 
+                    {% if proceso.rt_final == 'Termoquímica' or proceso.rt_final == 'Hibrida'%}
+                
+                        <p><strong>La ruta termoquímica</strong> comprende procesos que aprovechan la energía térmica de la biomasa residual. Los procesos termoquímicos para la generación de electricidad a partir de biomasa residual involucran la conversión de la materia orgánica contenida en los residuos en formas de energía aprovechables. Estos procesos pueden incluir la gasificación y la combustión.
+
+                        </p>
+                    {% endif %}
+
                     
-                    {% if proceso.tec_final or proceso.tec_final1 or proceso.tec_final2 == 'Combustión - Ciclo Rankine Convencional accionado con turbina axial / Gasificación' %} 
-                    
-                        <p>
-                            <strong>  Tecnologías por procesos Termoquímicos: </strong>Por medio de las tecnologias de gasificacion se puede producir Syngas o gas de sintesis,este se emplea para alimentar motores de combustión interna, turbinas de gas o plantas de ciclo combinado. Estos dispositivos convierten la energía química del gas en energía mecánica, que luego se convierte en electricidad a través de un generador. Otra tecnologia ampliamente empleada es la combustion directa de la biomasa, allí  la materia orgánica contenida en los residuos se quema directamente en presencia de oxígeno para generar calor esto se puede lograr por medio de diferentes ciclos termodinamicos (Ciclo Rankine Organico, Ciclo Rankine convencional, entre otros). El calor liberado se utiliza para calentar agua y producir vapor. El vapor a alta presión se dirige hacia una turbina de vapor que, al girar, acciona un generador que convierte la energía mecánica en electricidad. 
+                    {% if proceso.rt_final == 'Bioquímica' or proceso.rt_final == 'Hibrida' %}
+
+                                      
+                        <p> <strong>La ruta bioquímica</strong> para la generación de electricidad a partir de biomasa residual implica la descomposición biológica de la biomasa en un proceso conocido como digestión anaeróbica o fermentación. Se refiere al proceso de transformar biomasa residual, como restos de plantas y desechos orgánicos, en electricidad utilizando reacciones biológicas.  Al generar electricidad a partir de biomasa, se evita que los materiales orgánicos se acumulen como desechos, reduciendo la contaminación y la necesidad de vertederos. Es una forma sostenible de generar electricidad a partir el biogás generado, ya que no solo produce energía, sino que también reduce la cantidad de desechos y emisiones gases de efecto invernadero. 
+    
 
                         </p>
 
                     {% endif %}
 
 
-                    {% if proceso.tec_final or proceso.tec_final1 or proceso.tec_final2 == 'Combustión - Ciclo Rankine Convencional accionado con turbina axial' %} 
+
+                    
+                    {% if proceso.tec_final == 'Combustión - Ciclo Rankine Convencional accionado con turbina axial / Gasificación' or proceso.tec_final1 == 'Combustión - Ciclo Rankine Convencional accionado con turbina axial / Gasificación' or proceso.tec_final2 == 'Combustión - Ciclo Rankine Convencional accionado con turbina axial / Gasificación' %} 
+                    
+                        <p>
+                            <strong>  Tecnologías por procesos Termoquímicos: </strong>Por medio de las tecnologías de gasificación se puede producir Syngas o gas de síntesis, este se emplea para alimentar motores de combustión interna, turbinas de gas o plantas de ciclo combinado. Estos dispositivos convierten la energía química del gas en energía mecánica, que luego se convierte en electricidad a través de un generador. Otra tecnología ampliamente empleada es la combustión directa de la biomasa, allí  la materia orgánica contenida en los residuos se quema directamente en presencia de oxígeno para generar calor esto se puede lograr por medio de diferentes ciclos termodinámicos (Ciclo Rankine orgánico, Ciclo Rankine convencional, entre otros). El calor liberado se utiliza para calentar agua y producir vapor. El vapor a alta presión se dirige hacia una turbina de vapor que, al girar, acciona un generador que convierte la energía mecánica en electricidad.  
+
+                        </p>
+
+                    {% endif %}
+
+
+                    {% if proceso.tec_finaL == 'Combustión - Ciclo Rankine Convencional accionado con turbina axial' or proceso.tec_final1 == 'Combustión - Ciclo Rankine Convencional accionado con turbina axial' or proceso.tec_final2 == 'Combustión - Ciclo Rankine Convencional accionado con turbina axial' %} 
                     
                         <p>
                         <strong>Combustión empleando Ciclo rankine convencional: </strong> La biomasa residual se quema para calentar agua y generar vapor en el ciclo Rankine convencional. El vapor de alta presión impulsa una turbina conectada a un generador que produce electricidad.
-                        Los procesos que se comprenden mediante esta tecnologia son los siguientes: 
+                        Los procesos que se comprenden mediante esta tecnología son los siguientes: 
                             <ul>
                                 <li><strong>Combustión de Biomasa:</strong>
                                 Biomasa residual se quema en una caldera, liberando calor al quemar madera, desechos agrícolas u otros materiales orgánicos.
@@ -443,12 +472,12 @@
                     {% endif %}
 
 
-                    {% if proceso.tec_final or proceso.tec_final1 or proceso.tec_final2 == 'Combustión - Ciclo Rankine Orgánico accionado con turbina axial' %} 
+                    {% if proceso.tec_final == 'Combustión - Ciclo Rankine Orgánico accionado con turbina axial' or proceso.tec_final1 or proceso.tec_final2 == 'Combustión - Ciclo Rankine Orgánico accionado con turbina axial' %} 
                     
                         <p>
                             <strong>Combustión empleando Ciclo rankine orgánico: </strong> Es un proceso que involucra la transformación de la energía contenida en la biomasa en electricidad utilizando un ciclo termodinámico de tipo Rankine, pero con un fluido orgánico como medio de trabajo en lugar de agua, lo que permite que el cambio de fase líquido a vapor o punto de ebullición tenga lugar a temperaturas más bajas. Esto permite aprovechar la energía contenida en la biomasa para generar electricidad. 
 
-                            Los procesos que se comprenden mediante esta tecnologia son los siguientes:
+                            Los procesos que se comprenden mediante esta tecnología son los siguientes:
                             <ul>
                                 <li>
                                     <strong>Combustión de biomasa:</strong> La biomasa, que puede ser residuos agrícolas, forestales, agroalimentarios o residuos urbanos, se quema en una caldera para generar calor. Durante este proceso, se libera energía térmica a partir de la biomasa.
@@ -474,7 +503,7 @@
                     
                 
 
-                    {% if proceso.tec_final or proceso.tec_final1 or proceso.tec_final2 == 'Digestión anaerobia - generación de biogas - impulsor MCI' %} 
+                    {% if proceso.tec_final == 'Digestión anaerobia - generación de biogas - impulsor MCI' or proceso.tec_final1 == 'Digestión anaerobia - generación de biogas - impulsor MCI' or proceso.tec_final2 == 'Digestión anaerobia - generación de biogas - impulsor MCI' %} 
                     
                         <p>
                         <strong>Tecnologías para procesos bioquímicos:</strong> La ruta bioquímica para la generación de electricidad a partir de biomasa residual implica la descomposición biológica de la biomasa en un proceso conocido como digestión anaeróbica o fermentación. Es una forma sostenible de generar electricidad a partir de biomasa residual, ya que no solo produce energía, sino que también reduce la cantidad de desechos y emisiones. La tecnología mas aplicamente usada para generación de electricidad  a partir del biogas geenrado por medio de digestión  generado es el empleo de motores de combustion interna. 
@@ -495,13 +524,12 @@
                                 <li><strong>Gestión de Subproductos:</strong> Tras la digestión, se obtiene un residuo llamado digestato, rico en nutrientes, útil como fertilizante en la agricultura.</li>
                         </ul>
                         
-                    {% endif %}
-
-            
+                    {% endif %}           
                 
 
         {% endif %}
-        <a href="{% url 'inicio' %}"><button class="button">Iniciar otro proceso</button></a> 
+
+        <a  href="{% url 'inicio' %}"><button class="button">Iniciar otro proceso</button></a> 
 
       
 

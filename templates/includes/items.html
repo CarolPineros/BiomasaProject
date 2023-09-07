@@ -11,7 +11,7 @@
             <li><a {% if proceso.id %} href="{% url 'rsu' proceso.id %}" {% endif %} class="{% if '/rsu/' in request.path %} active {% endif %}">2.3 RSU</a></li>
             <li><a {% if proceso.id %} href="{% url 'rsuo' proceso.id %}" {% endif %} class="{% if '/rsuo/' in request.path %} active {% endif %}">2.4 RSUO</a></li>
             </div>
-            <li><a {% if proceso.ed %} href="{% url 'demanda' proceso.id %}" {% endif %} class="{% if '/demanda/' in request.path %} active {% endif %}">3. Demanda Enérgetica</a></li>
-            <li><a {% if proceso.rt_final != '' and proceso.id %} href="{% url 'resultados' proceso.id %}" {% endif %} class="{% if '/resultados/' in request.path %} active {% endif %}">4. Resultados</a></li>
+            <li><a {% if proceso.ed > 0 %} href="{% url 'demanda' proceso.id %}" {% endif %} class="{% if '/demanda/' in request.path %} active {% endif %}">3. Demanda Enérgetica</a></li>
+            <li><a {% if proceso.rt_final == '' or None and proceso.id %} href="{% url 'resultados' proceso.id %}" {% endif %} class="{% if '/resultados/' in request.path %} active {% endif %}">4. Resultados</a></li>
         </ul>
     </div>

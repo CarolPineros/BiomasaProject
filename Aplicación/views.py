@@ -485,7 +485,6 @@ def Viabilidad_RT(proceso):   #PROCESO D1 - D2
 
 
 
-
 def def_caso(proceso):
     Viabilidad_RT(proceso)
 
@@ -506,23 +505,19 @@ def def_caso(proceso):
         proceso.caso='caso4'
         proceso.rt_final = 'Hibrida'
         
-    elif proceso.cub_rt_bioq>= proceso.cub_rt_termo:
-        if proceso.Bioquimica == True:
-            proceso.caso='caso5'
-            proceso.rt_final = 'Bioquímica'
-        else:
-            pass     
-    elif proceso.Termoquimica == True:
+    elif proceso.cub_rt_bioq >= proceso.cub_rt_termo and proceso.Bioquimica == True:
+        proceso.caso='caso5'
+        proceso.rt_final = 'Bioquímica'
+   
+    elif proceso.cub_rt_termo >= proceso.cub_rt_bioq  and proceso.Termoquimica == True:
         proceso.caso='caso6'
-        proceso.rt_final = 'Termoquímica'        
-    elif proceso.Termoquimica == False and proceso.Bioquimica == False:
+        proceso.rt_final = 'Termoquímica'
+
+    else:
         proceso.caso='caso7'
         proceso.rt_final = 'Ninguna'
-    else:
-        pass
+   
     
-
-  
     proceso.save()
     comentario_resultado(proceso)
 
@@ -596,8 +591,8 @@ def PROCESO_E2F2(proceso, punit): #RUTA BIOQUIMICA
 def capacidad_y_cantidad_plantasFP(proceso, cap, punit):
     #PROCESO FP
     for i in cap:
-        if i>=punit:
-        #if punit/i >=1 :       
+        #if i>=punit:
+        if punit/i >=1 :       
             if (proceso.pot_CGD/i)-int(proceso.pot_CGD/i) <0.5:
                 Cant_plantas_1=int(proceso.pot_CGD/i)                     
             else:
@@ -608,7 +603,9 @@ def capacidad_y_cantidad_plantasFP(proceso, cap, punit):
 
 
             if MW_faltante <=-0.001:
-                proceso.comentario_cubrimiento_planta= (f'{abs(MW_faltante)} MW sin cubrimiento por la capacidad de planta, puede cubrir con otra planta de capacidad disponible')
+                proceso.comentario_cubrimiento_planta= (f'Cubre total de demanda energética. ')
+                proceso.cant_plantas=Cant_plantas_1+1
+                proceso.cap_planta=i 
                 
             else:
                 proceso.comentario_cubrimiento_planta= (f'Cubre total de demanda energética')
@@ -632,8 +629,8 @@ def capacidad_y_cantidad_plantasFP2(proceso, cap, punit):
     #PROCESO FP2 - RUTA BIOQUIMICA
 
     for i in cap:
-        if i>=punit:
-        #if punit/i >=1 :     
+        #if i>=punit:
+        if punit/i >=1 :     
 
             if (proceso.Pot_CGD_parcial_bioq/i)-int(proceso.Pot_CGD_parcial_bioq/i) <0.5:
                 Cant_plantas_1=int(proceso.Pot_CGD_parcial_bioq/i)                     
@@ -645,13 +642,15 @@ def capacidad_y_cantidad_plantasFP2(proceso, cap, punit):
 
             
             if MW_faltante <=-0.001:
-                proceso.comentario_cubrimiento_planta= (f'{abs(MW_faltante)} MW sin cubrimiento por la capacidad de planta, puede cubrir con otra planta de capacidad disponible')
+                proceso.comentario_cubrimiento_planta= (f'Cubre el total de demanda energética,pero debe complementar con más biomasa residual para procesos bioqumicos, de lo contrario seleccione una potencia de planta inferior según capacidades disponibles comercialmente.')
+                proceso.cant_plantas=Cant_plantas_1+1
+                proceso.cap_planta=i 
 
 
                 
             else:
                
-                proceso.comentario_cubrimiento_planta= (f'Cubre total de demanda energética,pero debe complementar con mas biomasa residual para procesos bioqumicos, de lo contrario seleccione una potencia de planta inferior según capacidades indicadas')
+                proceso.comentario_cubrimiento_planta= (f'Cubre total de demanda energética con la biomasa disponible')
                 proceso.cant_plantas=Cant_plantas_1
                 proceso.cap_planta=i
                 #proceso.comentario_cantplantas= (f'No plantas: {proceso.cant_plantas} Potencia:{proceso.cap_planta} MW')
@@ -672,8 +671,8 @@ def capacidad_y_cantidad_plantasFP3(proceso, cap, punit):
     #PROCESO FP3 - RUTA TERMOQUIMICA
     #Pot_CGD_parcial_termo
     for i in cap:
-        if i>=punit:
-        #if punit/i >=1 :    
+        #if i>=punit:
+        if punit/i >=1 :    
 
 
 
@@ -687,12 +686,12 @@ def capacidad_y_cantidad_plantasFP3(proceso, cap, punit):
 
 
             if MW_faltante <=-0.001:
-                proceso.comentario_cubrimiento_planta= (f'{abs(MW_faltante)} MW sin cubrimiento por la capacidad de planta, puede cubrir con otra planta de capacidad disponible')
-                proceso.cant_plantas=Cant_plantas_1
-                proceso.cap_planta=i
+                proceso.comentario_cubrimiento_planta= (f'Cubre el total de demanda energética,pero debe complementar con mas biomasa residual para procesos termoquímicos, de lo contrario seleccione una potencia de planta inferior según capacidades disponibles comercialmente.')
+                proceso.cant_plantas=Cant_plantas_1+1
+                proceso.cap_planta=i 
                 
             else:
-                proceso.comentario_cubrimiento_planta= (f'Cubre total de demanda energética,pero debe complementar con mas biomasa residual para procesos termoquímicos, de lo contrario seleccione una potencia de planta inferior según capacidades indicadas')
+                proceso.comentario_cubrimiento_planta= (f'Cubre total de demanda energética con la biomasa disponible')
                 proceso.cant_plantas=Cant_plantas_1
                 proceso.cap_planta=i
                 #proceso.comentario_cantplantas= (f'No plantas: {cant_plantas} Potencia:{cap_planta} MW')
@@ -746,34 +745,34 @@ def comentario_resultado(proceso):
 
     if proceso.caso=='caso0':
         proceso.comentario = (
-                f'No hay demanda energética suficiente para proyectar una CGD con la biomasa disponible, la potencia minima requerida es de 0,1 MW, y se esta requiriendo {proceso.pot_CGD} MW para el centro de consumo. En ese caso lo recomendado es optar por un proceso diferente de valorización de la biomasa residual, por ejemplo, compostaje.')
+                f'No hay demanda energética suficiente para proyectar una CGD con la biomasa disponible, la potencia minima requerida es de 0,1 MW, y se esta requiriendo {round(proceso.pot_CGD,2)} MW para el centro de consumo. En ese caso lo recomendado es optar por un proceso diferente de valorización de la biomasa residual, por ejemplo, compostaje.')
 
     if proceso.caso=='caso1':
         proceso.comentario = (
-                f'Las dos rutas tecnológicas cubren el 100% la demanda energética con la biomasa disponible. La ruta tecnologica seleccionada es {proceso.rt_final}, se considera la ruta con menores costos asociados a inversión, operación y mantenimiento. La potencia de planta obtenida de la biomasa residual fue {proceso.pot_tec_bioq_planta} MW y potencia global de planta requerida es de {proceso.pot_CGD} MW. Se determinó como tecnología recomendada {proceso.tec_final}, y para cubrir la demanda energética del centro de consumo se determino cantidad de {proceso.cant_plantas} plantas (unidades) , cada una con potencia de {proceso.cap_planta} MW')
+                f'Las dos rutas tecnológicas cubren el 100% la demanda energética con la biomasa disponible. La ruta técnológica seleccionada es {proceso.rt_final}, se considera la ruta con menores costos asociados a inversión, operación y mantenimiento. La potencia de planta obtenida de la biomasa residual fue {round(proceso.pot_tec_bioq_planta,2)} MW y potencia global de planta requerida es de {round(proceso.pot_CGD,2)} MW. Se determinó como tecnología recomendada {proceso.tec_final}, y para cubrir la demanda energética del centro de consumo se determino cantidad de {proceso.cant_plantas} plantas (unidades) , cada una con potencia de {proceso.cap_planta} MW')
 
     if proceso.caso=='caso2':
         proceso.comentario = (
-                f'Si es posible cubrir el 100% de la demanda energética con la biomasa disponible. La ruta tecnologica es {proceso.rt_final}. La potencia de planta obtenida de la biomasa residual fue {proceso.pot_tec_termo_planta} MW y la planta requerida es de {proceso.pot_CGD} MW. Se determinó como tecnología recomendada {proceso.tec_final}, y para cubrir la demanda energética del centro de consumo se determino cantidad de {proceso.cant_plantas} plantas (unidades) , cada una con potencia de {proceso.cap_planta} MW')
+                f'Si es posible cubrir el 100% de la demanda energética con la biomasa disponible. La ruta técnológica es {proceso.rt_final}. La potencia de planta obtenida de la biomasa residual fue {round(proceso.pot_tec_termo_planta,2)} MW y la planta requerida es de {round(proceso.pot_CGD,2)} MW. Se determinó como tecnología recomendada {proceso.tec_final}, y para cubrir la demanda energética del centro de consumo se determino cantidad de {proceso.cant_plantas} plantas (unidades) , cada una con potencia de {proceso.cap_planta} MW')
 
     if proceso.caso=='caso3':
         proceso.comentario = (
-                f'Si es posible cubrir el 100% de la demanda energética con la biomasa disponible. La ruta tecnologica es {proceso.rt_final}. La potencia de planta obtenida de la biomasa residual fue {proceso.pot_tec_bioq_planta} MW y la planta requerida es de {proceso.pot_CGD} MW. Se determinó como tecnología recomendada {proceso.tec_final}, y para cubrir la demanda energética del centro de consumo se determino cantidad de {proceso.cant_plantas} plantas (unidades) , cada una con potencia de {proceso.cap_planta} MW')
+                f'Si es posible cubrir el 100% de la demanda energética con la biomasa disponible. La ruta técnológica es {proceso.rt_final}. La potencia de planta obtenida de la biomasa residual fue {round(proceso.pot_tec_bioq_planta,2)} MW y la planta requerida es de {round(proceso.pot_CGD,2)} MW. Se determinó como tecnología recomendada {proceso.tec_final}, y para cubrir la demanda energética del centro de consumo se determino cantidad de {proceso.cant_plantas} plantas (unidades) , cada una con potencia de {proceso.cap_planta} MW')
     
     if proceso.caso=='caso4': 
-        proceso.comentario = (f'Se logra un cubrimiento de {round(proceso.cub_total,2)}% de la demanda con las dos rutas tecnologicas. La potencia de planta obtenida de la biomasa residual fue {round(proceso.pot_tec_bioq_planta,2)} MW para ruta Bioquimica, y {round(proceso.pot_tec_termo_planta,2)} MW para ruta termoquímica .Se dan los resultados de tecnología recomendada para ruta tecnologica. Si el cubrimiento energético se considera insuficiente, se recomienda reunir más recursos de biomasa residual para lograr un mayor potencial energético (Iniciar nuevo proceso) y obtener un mayor cubrimiento energético. ') 
+        proceso.comentario = (f'Se logra un cubrimiento de {round(proceso.cub_total,2)}% de la demanda con las dos rutas técnológicas. La potencia de planta obtenida de la biomasa residual fue {round(proceso.pot_tec_bioq_planta,2)} MW para ruta Bioquimica, y {round(proceso.pot_tec_termo_planta,2)} MW para ruta termoquímica. Se dan los resultados de tecnología recomendada para ruta técnológica. Si el cubrimiento energético se considera insuficiente, se recomienda reunir más recursos de biomasa residual para lograr un mayor potencial energético (Iniciar nuevo proceso) y obtener un mayor cubrimiento energético. ') 
 
     
     if proceso.caso=='caso5': 
         proceso.comentario = (
-            f'No es posible cubrir el 100% de la demanda con la biomasa disponible. Se logra cubrir parcialmente {proceso.cub_rt_bioq}% con la ruta Bioquimica, el faltante se debe cubrir con otra fuente distinta a la Biomasa residual ingresada u otra fuente de generación electrica. La potencia de planta obtenida de la biomasa residual fue {proceso.pot_tec_bioq_planta} MW. La tecnología recomendada es {proceso.tec_final}, cantidad de {proceso.cant_plantas} con una capacidad de planta de {proceso.cap_planta} MW cada una. Si el cubrimiento energético se considera insuficiente, se recomienda reunir más recursos de biomasa residual para lograr un mayor potencial energético (Iniciar nuevo proceso) y obtener un mayor cubrimiento energético. ')  
+            f'No es posible cubrir el 100% de la demanda con la biomasa disponible. Se logra cubrir parcialmente {proceso.cub_rt_bioq}% con la ruta Bioquimica, el faltante se debe cubrir con otra fuente distinta a la Biomasa residual ingresada u otra fuente de generación electrica. La potencia de planta obtenida de la biomasa residual fue {round(proceso.pot_tec_bioq_planta,2)} MW. La tecnología recomendada es {proceso.tec_final}, cantidad de {proceso.cant_plantas} con una capacidad de planta de {proceso.cap_planta} MW cada una. Si el cubrimiento energético se considera insuficiente, se recomienda reunir más recursos de biomasa residual para lograr un mayor potencial energético (Iniciar nuevo proceso) y obtener un mayor cubrimiento energético. ')  
 
     if proceso.caso=='caso6': 
         proceso.comentario = (
-            f'No es posible cubrir el 100% de la demanda con la biomasa disponible. Se logra cubrir parcialmente {proceso.cub_rt_termo}% con la ruta Termoquímica, el faltante se debe cubrir con otra fuente distinta a la Biomasa residual ingresada u otra fuente de generación electrica. La potencia de planta obtenida de la biomasa residual fue {proceso.pot_tec_termo_planta} MW y la planta requerida es de {proceso.pot_CGD} MW. La tecnología recomendada es {proceso.tec_final}, cantidad de {proceso.cant_plantas} con una capacidad de planta de {proceso.cap_planta} MW cada una. Si el cubrimiento energético se considera insuficiente, se recomienda reunir más recursos de biomasa residual para lograr un mayor potencial energético (Iniciar nuevo proceso) y obtener un mayor cubrimiento energético. ')  
+            f'No es posible cubrir el 100% de la demanda con la biomasa disponible. Se logra cubrir parcialmente {proceso.cub_rt_termo}% con la ruta Termoquímica, el faltante se debe cubrir con otra fuente distinta a la Biomasa residual ingresada u otra fuente de generación electrica. La potencia de planta obtenida de la biomasa residual fue {round(proceso.pot_tec_termo_planta,2)} MW y la planta requerida es de {round(proceso.pot_CGD,2)} MW. La tecnología recomendada es {proceso.tec_final}, cantidad de {proceso.cant_plantas} con una capacidad de planta de {proceso.cap_planta} MW cada una. Si el cubrimiento energético se considera insuficiente, se recomienda reunir más recursos de biomasa residual para lograr un mayor potencial energético (Iniciar nuevo proceso) y obtener un mayor cubrimiento energético. ')  
     if proceso.caso=='caso7':
         proceso.comentario = (
-            f'Existe un demanda energetica mayor a 0,1 MW (Suficiente), sin embargo ninguna ruta tecnologica fue seleccionada, la biomasa disponible se considera muy poca o de bajo potencial energetico para emplear tecnologias de generación de electricidad. En ese caso lo recomendado es optar por un proceso diferente de valorización de la biomasa residual, por ejemplo, compostaje.')
+            f'Existe un demanda energética mayor a 0,1 MW (Suficiente), sin embargo ninguna ruta técnológica fue seleccionada, la biomasa disponible se considera muy poca o de bajo potencial energético para emplear tecnologías de generación de electricidad. En ese caso lo recomendado es optar por un proceso diferente de valorización de la biomasa residual, por ejemplo, compostaje.')
 
     proceso.save()
 
@@ -788,7 +787,7 @@ def resultados(request,proceso_id): #RESULTADOS DEF_PUNIT
     proceso.suma_termo = suma_termo
     proceso.suma_bioq = suma_bioq
 
-    if proceso.suma_termo >0  or proceso.suma_bioq > 0:
+    if proceso.suma_termo >0  or proceso.suma_bioq > 0 or proceso.edf >0:
         visual=True
 
 
@@ -811,7 +810,6 @@ def resultados(request,proceso_id): #RESULTADOS DEF_PUNIT
                 punit=proceso.pot_CGD
             proceso.punit = punit
             cap, proceso.tec_final = PROCESO_E1F1(proceso, punit) #RT Termoquimica - obtener tec final y cap 
-
             capacidad_y_cantidad_plantasFP(proceso  , cap , punit)
 
         if proceso.caso=='caso3':
@@ -844,7 +842,6 @@ def resultados(request,proceso_id): #RESULTADOS DEF_PUNIT
                 punit=proceso.pot_tec_termo_planta
             proceso.punit = punit
 
-   
             cap2, proceso.tec_final2 = PROCESO_E1F1(proceso, punit) #RT Termoquimica - obtener tec final y cap 
             proceso.cap_planta2, proceso.cant_plantas2,proceso.comentario_cantplantas2, proceso.comentario_cubrimiento_planta2 = capacidad_y_cantidad_plantasFP3(proceso  , cap2 , punit) #FP3
             calculo_costos(proceso)
@@ -871,8 +868,7 @@ def resultados(request,proceso_id): #RESULTADOS DEF_PUNIT
             cap, tec_final = PROCESO_E1F1(proceso, punit) #RT Termoquimica - obtener tec final y cap 
             capacidad_y_cantidad_plantasFP3(proceso  , cap , punit)
         
-        if proceso.caso=='caso7':
-            comentario_resultado(proceso)
+  
 
 
         # Guardamos los resultados
